@@ -18,16 +18,16 @@ const Navbar = () => {
     const user = session?.user
     return (
         <nav className='border-b border-border py-2 sm:py-1'>
-            <div className='flex items-center justify-between px-2 max-w-7xl mx-auto'>
+            <div className='flex items-center justify-between px-1 sm:px-2 max-w-7xl mx-auto'>
                 <div className='flex items-center justify-start'>
-                    <div>
+                    <div className='shrink-0'>
                         <Image
                             src={LightLogo}
                             alt='FlatBill'
                             width={140}
                             height={70}
                             priority
-                            className='dark:hidden w-28 sm:w-35 h-auto'
+                            className='dark:hidden w-33 sm:w-35 h-auto'
                         />
                         <Image
                             src={DarkLogo}
@@ -35,7 +35,7 @@ const Navbar = () => {
                             width={140}
                             height={70}
                             priority
-                            className='hidden dark:block w-28 sm:w-35 h-auto'
+                            className='hidden dark:block w-33 sm:w-35 h-auto'
                         />
 
                     </div>
