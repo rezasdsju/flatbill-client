@@ -4,6 +4,10 @@ FlatBill helps flat owners' committees and building managers handle monthly serv
 
 > This repository contains the **Next.js frontend** of FlatBill.
 
-## Related Repository
+## Live Links
 
-- [FlatBill Backend](https://github.com/rezasdsju/housebill-server)
+| Resource | Link |
+|---|---|
+| Live Website | https://flatbill-bd.vercel.app/ |
+| API Base URL | https://flatbill-server.vercel.app/ |
+| Backend Repository | https://github.com/rezasdsju/flatbill-server |
