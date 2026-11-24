@@ -2,6 +2,8 @@
 
 import {
     CardDescription,
+    Card,
+    CardContent,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
@@ -20,6 +22,7 @@ import { authClient } from "@/lib/auth-client"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { toast } from "sonner"
+import { Eye, EyeOff, ImagePlus, LockKeyhole } from "lucide-react"
 
 
 interface Props {
@@ -31,6 +34,8 @@ const AuthForm = ({ mode }: Props) => {
     const isRegister = mode === 'register'
     const router = useRouter()
     const [clickedToAuthButton, setClickedToAuthButton] = useState(false)
+    const [showPassword, setShowPassword] = useState(false)
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
     const handleAuth = async (e: React.SubmitEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -104,131 +109,187 @@ const AuthForm = ({ mode }: Props) => {
         }
     }
     return (
-        <div>
-
-            <CardHeader className="text-center">
-                <CardTitle className="text-2xl font-bold">
-                    {isRegister ? "Create an Account" : "Welcome Back"}
-                </CardTitle>
-                <CardDescription>
-                    {isRegister
-                        ? "Enter your details below to create your FlatBill account"
-                        : "Sign in to manage your building bills and service charges"}
-                </CardDescription>
+        <Card className="w-full border-border/70 bg-card/95 shadow-xl shadow-foreground/5 ring-1 ring-border/40 backdrop-blur">
+            <CardHeader className="space-y-3 px-5 pt-6 sm:px-8 sm:pt-8">
+                <div className="flex size-11 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                    <LockKeyhole className="size-5" aria-hidden="true" />
+                </div>
+                <div className="space-y-1.5">
+                    <CardTitle className="text-2xl font-semibold tracking-tight sm:text-3xl">
+                        {isRegister ? "Create an Account" : "Welcome Back"}
+                    </CardTitle>
+                    <CardDescription className="max-w-sm text-sm leading-6">
+                        {isRegister
+                            ? "Enter your details below to create your FlatBill account"
+                            : "Sign in to manage your building bills and service charges"}
+                    </CardDescription>
+                </div>
             </CardHeader>
-            <form onSubmit={handleAuth}>
-                <FieldGroup>
-                    {
-                        isRegister &&
-                        <Field>
-                            <FieldLabel htmlFor="name">Full Name</FieldLabel>
-                            <Input name="name" id="name" type="text" placeholder="John Doe" required />
-                        </Field>
-                    }
-
-
-                    <Field>
-                        <FieldLabel htmlFor="email">Email</FieldLabel>
-                        <Input
-                            name="email"
-                            id="email"
-                            type="email"
-                            placeholder="m@example.com"
-                            required
-                        />
-                        <FieldDescription>
-                            We&apos;ll use this to contact you. We will not share your email
-                            with anyone else.
-                        </FieldDescription>
-                    </Field>
-
-
-                    {
-                        isRegister &&
-                        <div className={`flex items-center justify-between ${imagePreview && 'gap-5'}`}>
-                            <div>
-                                {imagePreview && (
-                                    <img
-                                        src={imagePreview}
-                                        alt="Profile preview"
-                                        className="mt-3 size-20 rounded-full object-cover"
-                                    />
-                                )}
-                            </div>
-                            <Field>
-                                <FieldLabel htmlFor="image">Profile Photo</FieldLabel>
+            <CardContent className="px-5 pb-6 sm:px-8 sm:pb-8">
+                <form onSubmit={handleAuth}>
+                    <FieldGroup className="gap-4 sm:gap-5">
+                        {isRegister && (
+                            <Field className="gap-2">
+                                <FieldLabel className="text-sm font-medium" htmlFor="name">Full Name</FieldLabel>
                                 <Input
-                                    name="image"
-                                    id="image"
-                                    type="file"
-                                    accept="image/*"
-                                    onChange={handleImageChange}
-
+                                    className="h-11 bg-background/80 px-3"
+                                    name="name"
+                                    id="name"
+                                    type="text"
+                                    placeholder="John Doe"
+                                    required
                                 />
-                                <FieldDescription>
-                                    {isUploadingImage
-                                        ? "Uploading image..."
-                                        : imageUrl
-                                            ? "Image uploaded successfully."
-                                            : "Upload your profile photo"}
+                            </Field>
+                        )}
+
+                        <Field className="gap-2">
+                            <FieldLabel className="text-sm font-medium" htmlFor="email">Email</FieldLabel>
+                            <Input
+                                className="h-11 bg-background/80 px-3"
+                                name="email"
+                                id="email"
+                                type="email"
+                                placeholder="m@example.com"
+                                required
+                            />
+                            <FieldDescription className="text-xs leading-5">
+                                We&apos;ll use this to contact you. We will not share your email
+                                with anyone else.
+                            </FieldDescription>
+                        </Field>
+
+                        {isRegister && (
+                            <div className="grid gap-3 rounded-2xl border border-dashed border-border bg-muted/40 p-3 sm:grid-cols-[4.5rem_minmax(0,1fr)] sm:items-center sm:p-4">
+                                <div className="flex items-center justify-center">
+                                    {imagePreview ? (
+                                        <img
+                                            src={imagePreview}
+                                            alt="Profile preview"
+                                            className="size-16 rounded-2xl object-cover ring-1 ring-border sm:size-18"
+                                        />
+                                    ) : (
+                                        <div className="flex size-16 items-center justify-center rounded-2xl bg-background text-muted-foreground ring-1 ring-border sm:size-18">
+                                            <ImagePlus className="size-6" aria-hidden="true" />
+                                        </div>
+                                    )}
+                                </div>
+                                <Field className="gap-2">
+                                    <FieldLabel className="text-sm font-medium" htmlFor="image">Profile Photo</FieldLabel>
+                                    <Input
+                                        className="h-11 bg-background/80 text-xs file:mr-3 file:rounded-md file:border-0 file:bg-primary/10 file:px-3 file:py-1 file:font-medium file:text-primary hover:file:bg-primary/15"
+                                        name="image"
+                                        id="image"
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={handleImageChange}
+                                    />
+                                    <FieldDescription className="text-xs">
+                                        {isUploadingImage
+                                            ? "Uploading image..."
+                                            : imageUrl
+                                                ? "Image uploaded successfully."
+                                                : "Upload your profile photo"}
+                                    </FieldDescription>
+                                </Field>
+                            </div>
+                        )}
+
+                        <Field className="gap-2">
+                            <FieldLabel className="text-sm font-medium" htmlFor="password">Password</FieldLabel>
+                            <div className="relative">
+                                <Input
+                                    className="h-11 bg-background/80 px-3 pr-12"
+                                    name="password"
+                                    id="password"
+                                    type={showPassword ? "text" : "password"}
+                                    required
+                                />
+                                <button
+                                    type="button"
+                                    className="absolute inset-y-0 right-0 flex w-11 items-center justify-center rounded-r-lg text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                                    aria-label={showPassword ? "Hide password" : "Show password"}
+                                    aria-pressed={showPassword}
+                                    onClick={() => setShowPassword((visible) => !visible)}
+                                >
+                                    {showPassword
+                                        ? <EyeOff className="size-4" aria-hidden="true" />
+                                        : <Eye className="size-4" aria-hidden="true" />}
+                                </button>
+                            </div>
+                            <FieldDescription className="text-xs">
+                                Must be at least 8 characters long.
+                            </FieldDescription>
+                        </Field>
+
+                        {isRegister && (
+                            <Field className="gap-2">
+                                <FieldLabel className="text-sm font-medium" htmlFor="confirm-password">
+                                    Confirm Password
+                                </FieldLabel>
+                                <div className="relative">
+                                    <Input
+                                        className="h-11 bg-background/80 px-3 pr-12"
+                                        name="password1"
+                                        id="confirm-password"
+                                        type={showConfirmPassword ? "text" : "password"}
+                                        required
+                                    />
+                                    <button
+                                        type="button"
+                                        className="absolute inset-y-0 right-0 flex w-11 items-center justify-center rounded-r-lg text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                                        aria-label={showConfirmPassword ? "Hide confirm password" : "Show confirm password"}
+                                        aria-pressed={showConfirmPassword}
+                                        onClick={() => setShowConfirmPassword((visible) => !visible)}
+                                    >
+                                        {showConfirmPassword
+                                            ? <EyeOff className="size-4" aria-hidden="true" />
+                                            : <Eye className="size-4" aria-hidden="true" />}
+                                    </button>
+                                </div>
+                                <FieldDescription className="text-xs">
+                                    Please confirm your password.
                                 </FieldDescription>
                             </Field>
-                        </div>
-                    }
+                        )}
 
-
-                    <Field>
-                        <FieldLabel htmlFor="password">Password</FieldLabel>
-                        <Input
-                            name="password"
-
-                            id="password" type="password" required />
-                        <FieldDescription>
-                            Must be at least 8 characters long.
-                        </FieldDescription>
-                    </Field>
-
-                    {
-                        isRegister &&
-                        <Field>
-                            <FieldLabel htmlFor="confirm-password">
-                                Confirm Password
-                            </FieldLabel>
-                            <Input
-                                name="password1"
-                                id="confirm-password"
-                                type="password" required />
-                            <FieldDescription>Please confirm your password.</FieldDescription>
-                        </Field>
-                    }
-
-
-
-                    <FieldGroup>
-                        <Field>
-                            <Button disabled={clickedToAuthButton || isUploadingImage} type="submit">
+                        <Field className="gap-3 pt-1">
+                            <Button
+                                className="h-11 w-full rounded-xl font-semibold shadow-sm"
+                                disabled={clickedToAuthButton || isUploadingImage}
+                                type="submit"
+                            >
                                 {isRegister
                                     ? (clickedToAuthButton ? "Creating Account..." : "Create Account")
                                     : (clickedToAuthButton ? "Signing In..." : "Sign In")}
                             </Button>
-                            <Button variant="outline" type="button">
+                            <Button
+                                className="h-11 w-full rounded-xl"
+                                variant="outline"
+                                type="button"
+                            >
+                                <span className="mr-2 text-base font-semibold" aria-hidden="true">G</span>
                                 Sign up with Google
                             </Button>
-                            {
-                                isRegister ?
-                                    <FieldDescription className="px-6 text-center">
-                                        Already have an account? <a href="#">Sign in</a>
-                                    </FieldDescription>
-                                    :
-                                    <FieldDescription className="px-6 text-center">
-                                        Don&apos;t have an account? <a href="#">Register</a>
-                                    </FieldDescription>
-                            }
+                            {isRegister ? (
+                                <FieldDescription className="pt-1 text-center">
+                                    Already have an account?{" "}
+                                    <a className="font-semibold text-primary underline-offset-4 hover:underline" href="#">
+                                        Sign in
+                                    </a>
+                                </FieldDescription>
+                            ) : (
+                                <FieldDescription className="pt-1 text-center">
+                                    Don&apos;t have an account?{" "}
+                                    <a className="font-semibold text-primary underline-offset-4 hover:underline" href="#">
+                                        Register
+                                    </a>
+                                </FieldDescription>
+                            )}
                         </Field>
                     </FieldGroup>
-                </FieldGroup >
-            </form>
-        </div>
+                </form>
+            </CardContent>
+        </Card>
     );
 };
 
