@@ -27,12 +27,13 @@ const features = [
     { label: "Reports", href: "/#reports", icon: ChartColumnIcon },
 ]
 
-const DropdownMenu = () => {
+type Props = { className?: string }
+const DropdownMenu = ({ className }: Props) => {
     return (
-        <NavigationMenu>
-            <NavigationMenuList>
+        <NavigationMenu className={className}>
+            <NavigationMenuList >
                 <NavigationMenuItem>
-                    <NavigationMenuTrigger className={`font-sans text-base font-normal`}>Features</NavigationMenuTrigger>
+                    <NavigationMenuTrigger className={`font-sans text-base font-normal `}>Features</NavigationMenuTrigger>
                     <NavigationMenuContent>
                         <ul className="grid w-56">
                             {features.map(({ label, href, icon: Icon }) => (
