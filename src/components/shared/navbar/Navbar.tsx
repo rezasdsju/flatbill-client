@@ -17,8 +17,8 @@ const Navbar = () => {
     const { data: session, isPending } = authClient.useSession()
     const user = session?.user
     return (
-        <nav className='sticky top-0 z-50 bg-background border-b border-border py-2 sm:py-1'>
-            <div className='flex items-center justify-between px-1 sm:px-2 max-w-7xl mx-auto'>
+        <nav className='sticky top-0 z-50 h-16 bg-background border-b border-border py-2 sm:py-1'>
+            <div className='flex items-center justify-between h-full px-1 sm:px-2 max-w-7xl mx-auto'>
                 <div className='flex items-center justify-start'>
                     <div className='shrink-0'>
                         <Image
