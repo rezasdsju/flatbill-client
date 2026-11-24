@@ -1,11 +1,8 @@
-
+'use client'
 
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import {
     Sheet,
-    SheetClose,
     SheetContent,
     SheetDescription,
     SheetFooter,
@@ -15,8 +12,12 @@ import {
 } from "@/components/ui/sheet"
 import { MenuIcon } from "lucide-react"
 import DropdownMenu from "./DropdownMenu"
+import { authClient } from "@/lib/auth-client"
+import LoadingSkeleton from "./LoadingSkeleton"
 
 export default function HamburgerSheet() {
+    const { data: session, isPending } = authClient.useSession()
+    const user = session?.user
     return (
         <Sheet>
             <SheetTrigger render={<Button variant="outline">
@@ -39,8 +40,14 @@ export default function HamburgerSheet() {
                     </div>
                 </div>
                 <SheetFooter>
-                    <button className='rounded-md px-4 py-2 border border-[#155EEF] text-[#155EEF] font-bold cursor-pointer'>Log In</button>
-                    <button className='rounded-md px-4 py-2 bg-[#155EEF] text-[#FFFFFF] hover:[#0047CC] font-bold cursor-pointer'>Register</button>
+                    {
+                        isPending ? <LoadingSkeleton /> :
+                            !user &&
+                            <div>
+                                <button className='rounded-md px-4 py-2 border border-[#155EEF] text-[#155EEF] font-bold cursor-pointer'>Log In</button>
+                                <button className='rounded-md px-4 py-2 bg-[#155EEF] text-[#FFFFFF] hover:[#0047CC] font-bold cursor-pointer'>Register</button>
+                            </div>
+                    }
                     {/* <SheetClose render={<Button variant="outline">Close</Button>} /> */}
                 </SheetFooter>
             </SheetContent>
