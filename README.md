@@ -11,3 +11,98 @@ FlatBill helps flat owners' committees and building managers handle monthly serv
 | Live Website | https://flatbill-bd.vercel.app/ |
 | API Base URL | https://flatbill-server.vercel.app/ |
 | Backend Repository | https://github.com/rezasdsju/flatbill-server |
+
+---
+
+## Planned Features
+
+### Admin (Building Manager or Committee)
+
+| Feature | Status |
+|---|---|
+| Create a building and add flats | Planned |
+| Assign an owner and a tenant to each flat | Planned |
+| Set up charge types (service charge, lift, generator, guard and more) | Planned |
+| Generate monthly bills for all flats with one click | Planned |
+| See who has paid and who is overdue | Planned |
+| Record cash or manual payments | Planned |
+| Add building expenses with receipt images | Planned |
+| Post notices | Planned |
+| Review complaints and update their status | Planned |
+| Dashboard with monthly income, expense and balance | Planned |
+
+### Owner and Tenant
+
+| Feature | Status |
+|---|---|
+| View current bill and payment history | Planned |
+| Pay bills online | Planned |
+| See the building's income and expense summary | Planned |
+| Read notices | Planned |
+| Submit complaints and track their status | Planned |
+| Edit profile | Planned |
+
+### General
+
+| Feature | Status |
+|---|---|
+| Email and password sign-in | Planned |
+| Google sign-in | Planned |
+| Role-based dashboards (Admin, Owner, Tenant) | Planned |
+| Responsive design for mobile | Planned |
+| Light and dark theme | Planned |
+
+---
+
+## Tech Stack
+
+| Category | Technology |
+|---|---|
+| Framework | Next.js (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS |
+| UI Components | shadcn/ui |
+| Icons | React Icons |
+
+---
+
+## Local Development
+
+### Prerequisites
+
+- Node.js
+- npm
+- Running FlatBill backend
+
+### Installation
+
+```bash
+git clone https://github.com/rezasdsju/flatbill-client.git
+cd flatbill-client
+npm install
+```
+
+### Environment Variables
+
+Create `.env.local` in the project root:
+
+```env
+NEXT_PUBLIC_API_BASE_URL=http://localhost:5000
+INTERNAL_API_KEY=
+```
+
+`INTERNAL_API_KEY` must be the same value as in the backend. Do not add `NEXT_PUBLIC_` before it.
+
+### Run Locally
+
+```bash
+npm run dev
+```
+
+Open `http://localhost:3000`.
+
+---
+
+## Related Repository
+
+- [FlatBill Backend](https://github.com/rezasdsju/flatbill-server)
