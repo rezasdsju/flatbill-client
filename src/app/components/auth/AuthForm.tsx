@@ -23,6 +23,7 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { toast } from "sonner"
 import { Eye, EyeOff, ImagePlus, LockKeyhole } from "lucide-react"
+import Link from "next/link"
 
 
 interface Props {
@@ -106,6 +107,24 @@ const AuthForm = ({ mode }: Props) => {
                 })
                 router.push('/')
             }
+        }
+    }
+
+    const handleGoogleSignIn = async () => {
+        setClickedToAuthButton(true)
+        const { data, error } = await authClient.signIn.social({
+            provider: 'google'
+        })
+        if (error) {
+            toast.error("Google sign-in failed", {
+                description: error.message || "Please try again or choose another sign-in method.",
+            })
+            setClickedToAuthButton(false)
+        }
+        if (data) {
+            toast.success("Google sign-in started", {
+                description: "Redirecting you to Google to finish signing in.",
+            })
         }
     }
     return (
@@ -263,26 +282,28 @@ const AuthForm = ({ mode }: Props) => {
                                     : (clickedToAuthButton ? "Signing In..." : "Sign In")}
                             </Button>
                             <Button
+                                onClick={handleGoogleSignIn}
+                                disabled={clickedToAuthButton}
                                 className="h-11 w-full rounded-xl"
                                 variant="outline"
                                 type="button"
                             >
                                 <span className="mr-2 text-base font-semibold" aria-hidden="true">G</span>
-                                Sign up with Google
+                                Continue with Google
                             </Button>
                             {isRegister ? (
                                 <FieldDescription className="pt-1 text-center">
                                     Already have an account?{" "}
-                                    <a className="font-semibold text-primary underline-offset-4 hover:underline" href="#">
+                                    <Link href={`sign-in`} className="font-semibold text-primary underline-offset-4 hover:underline" >
                                         Sign in
-                                    </a>
+                                    </Link>
                                 </FieldDescription>
                             ) : (
                                 <FieldDescription className="pt-1 text-center">
                                     Don&apos;t have an account?{" "}
-                                    <a className="font-semibold text-primary underline-offset-4 hover:underline" href="#">
+                                    <Link href={`register`} className="font-semibold text-primary underline-offset-4 hover:underline">
                                         Register
-                                    </a>
+                                    </Link>
                                 </FieldDescription>
                             )}
                         </Field>
