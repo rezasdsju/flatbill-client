@@ -1,4 +1,4 @@
-
+'use client'
 import Image from 'next/image'
 import DarkLogo from '@/app/assets/flatbill-logo-dark-mode.png'
 import LightLogo from '@/app/assets/flatbill-logo-light-mode.png'
@@ -7,10 +7,17 @@ import DropdownMenu from './DropdownMenu';
 
 
 import HamburgerSheet from './HamburgerSheet';
+import ProfileMenuPopOver from './ProfileMenuPopOver';
+import { SkeletonAvatar } from './SkeletonAvatar';
+import { authClient } from '@/lib/auth-client';
+
+
 
 const Navbar = () => {
+    const { data: session, isPending } = authClient.useSession()
+    const user = session?.user
     return (
-        <nav className='border-b border-border py-1'>
+        <nav className='border-b border-border py-2 sm:py-1'>
             <div className='flex items-center justify-between px-2 max-w-7xl mx-auto'>
                 <div className='flex items-center justify-start'>
                     <div>
@@ -44,15 +51,31 @@ const Navbar = () => {
                         <li>Contact</li>
                     </ul>
                 </div>
-                <div className='flex items-center justify-end gap-5'>
+                <div className={`flex items-center justify-end gap-5`}>
                     <ThemeToggle />
+
                     <div className='flex sm:hidden'>
                         <HamburgerSheet />
                     </div>
-                    <div className='hidden sm:flex items-center justify-center gap-5'>
-                        <button className='rounded-md px-4 py-2 border border-[#155EEF] text-[#155EEF] font-bold cursor-pointer'>Log In</button>
-                        <button className='rounded-md px-4 py-2 bg-[#155EEF] text-[#FFFFFF] hover:[#0047CC] font-bold cursor-pointer'>Register</button>
-                    </div>
+
+
+                    {
+                        isPending ? <SkeletonAvatar></SkeletonAvatar> :
+                            user ? <div>
+                                <div >
+                                    <ProfileMenuPopOver user={user} />
+                                </div>
+                                {/* <div className='flex sm:hidden'>
+                                    <Suspense><ProfileMenuSheet user={user} /></Suspense >
+                                </div> */}
+                            </div> :
+                                <div className='hidden sm:flex items-center justify-center gap-5'>
+                                    <button className='rounded-md px-4 py-2 border border-[#155EEF] text-[#155EEF] font-bold cursor-pointer'>Log In</button>
+                                    <button className='rounded-md px-4 py-2 bg-[#155EEF] text-[#FFFFFF] hover:[#0047CC] font-bold cursor-pointer'>Register</button>
+                                </div>
+                    }
+
+
                 </div>
             </div>
         </nav>
