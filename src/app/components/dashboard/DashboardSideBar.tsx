@@ -69,14 +69,14 @@ const sideBarItems = {
     ],
 
     "flat-owner": [
-        { name: "dashboard", url: "/dashboard/owner", icon: LayoutDashboard },
-        { name: "myFlats", url: "/dashboard/owner/my-flats", icon: Home },
-        { name: "myTenants", url: "/dashboard/owner/tenants", icon: UserCheck },
-        { name: "ownerBillsDues", url: "/dashboard/owner/bills", icon: Receipt },
-        { name: "associationAccounts", url: "/dashboard/owner/association-finance", icon: FileBarChart2 },
-        { name: "noticesMeetings", url: "/dashboard/owner/notices", icon: Megaphone },
-        { name: "complaints", url: "/dashboard/owner/complaints", icon: MessageSquareWarning },
-        { name: "profileSettings", url: "/dashboard/owner/settings", icon: Settings },
+        { name: "dashboard", url: "/dashboard/flat-owner", icon: LayoutDashboard },
+        { name: "myFlats", url: "/dashboard/flat-owner/my-flats", icon: Home },
+        { name: "myTenants", url: "/dashboard/flat-owner/tenants", icon: UserCheck },
+        { name: "ownerBillsDues", url: "/dashboard/flat-owner/bills", icon: Receipt },
+        { name: "associationAccounts", url: "/dashboard/flat-owner/association-finance", icon: FileBarChart2 },
+        { name: "noticesMeetings", url: "/dashboard/flat-owner/notices", icon: Megaphone },
+        { name: "complaints", url: "/dashboard/flat-owner/complaints", icon: MessageSquareWarning },
+        { name: "profileSettings", url: "/dashboard/flat-owner/settings", icon: Settings },
     ],
 
     tenant: [
