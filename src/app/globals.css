@@ -121,9 +121,11 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+
   html {
     @apply font-sans;
   }
@@ -131,4 +133,13 @@
 
 @theme inline {
   --font-sans: var(--font-inter), var(--font-noto-bengali), sans-serif;
+}
+
+
+body:has([data-slot="sidebar"][data-state="expanded"]) .site-footer {
+  padding-inline-start: 14rem;
+}
+
+body:has([data-slot="sidebar"][data-state="collapsed"]) .site-footer {
+  padding-inline-start: 2rem;
 }
