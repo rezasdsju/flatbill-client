@@ -33,6 +33,7 @@ import {
 import { authClient } from "@/lib/auth-client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useTranslations } from "next-intl";
+import { SkeletonAvatar } from "@/components/shared/navbar/SkeletonAvatar";
 const sideBarItems = {
     "super-admin": [
         { name: "dashboard", url: "/dashboard/super-admin", icon: LayoutDashboard },
@@ -114,16 +115,22 @@ export default function DashboardSideBar() {
             <SidebarFooter>
                 <SidebarMenu>
                     <SidebarMenuItem>
-                        <SidebarMenuButton>
-                            <Avatar>
-                                <AvatarImage
-                                    src={user?.image ?? undefined}
-                                    alt={user?.name ?? "Profile"}
-                                />
-                                <AvatarFallback>
-                                    {user?.name?.trim().charAt(0).toUpperCase() || <User2 />}
-                                </AvatarFallback>
-                            </Avatar>
+                        <SidebarMenuButton
+                            size="lg"
+                            tooltip={user?.name || 'Profile'}
+                        >
+                            {
+                                isPending ? <SkeletonAvatar /> :
+                                    <Avatar>
+                                        <AvatarImage
+                                            src={user?.image ?? undefined}
+                                            alt={user?.name ?? "Profile"}
+                                        />
+                                        <AvatarFallback>
+                                            {user?.name?.trim().charAt(0).toUpperCase() || <User2 />}
+                                        </AvatarFallback>
+                                    </Avatar>
+                            }
                             <div className="min-w-0 flex-1 text-left">
                                 <p className="truncate text-sm font-medium">{user?.name}</p>
                                 <p className="truncate text-xs text-muted-foreground">{user?.email}</p>
