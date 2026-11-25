@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Noto_Sans_Bengali } from "next/font/google";
-
+import { NextIntlClientProvider } from 'next-intl';
+import { getLocale } from "next-intl/server";
 import "./globals.css";
 import Navbar from "@/components/shared/navbar/Navbar";
 import ThemeProvider from "@/components/provider/ThemeProvider";
@@ -25,23 +26,28 @@ export const metadata: Metadata = {
     "Manage monthly service charges, payments, expenses, notices and complaints for your apartment building in one place.",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const locale = await getLocale();
+
   return (
     <html
-      lang="en"
+      lang={locale}
       suppressHydrationWarning
       className={`${inter.variable} ${notoSansBengali.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+
         <ThemeProvider
           attribute={`class`}
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <Navbar />
-          {children}
-          <Toaster />
+          <NextIntlClientProvider>
+            <Navbar />
+            {children}
+            <Toaster />
+          </NextIntlClientProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -14,10 +14,13 @@ import { MenuIcon } from "lucide-react"
 import DropdownMenu from "./DropdownMenu"
 import { authClient } from "@/lib/auth-client"
 import LoadingSkeleton from "./LoadingSkeleton"
+import { useTranslations } from "next-intl"
 
 export default function HamburgerSheet() {
+    const t = useTranslations('nav')
     const { data: session, isPending } = authClient.useSession()
     const user = session?.user
+
     return (
         <Sheet>
             <SheetTrigger render={<Button variant="outline">
@@ -33,10 +36,10 @@ export default function HamburgerSheet() {
 
                 <div className="flex flex-1 flex-col gap-6 px-4">
                     <div className="flex flex-col gap-4">
-                        <div className="pl-2">Home</div>
+                        <div className="pl-2">{t('home')}</div>
                         <DropdownMenu />
-                        <div className="pl-2">About</div>
-                        <div className="pl-2">Contact</div>
+                        <div className="pl-2">{t('about')}</div>
+                        <div className="pl-2">{t('contact')}</div>
                     </div>
                 </div>
                 <SheetFooter>

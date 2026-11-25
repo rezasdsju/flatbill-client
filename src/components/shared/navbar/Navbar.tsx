@@ -4,8 +4,8 @@ import DarkLogo from '@/app/assets/flatbill-logo-dark-mode.png'
 import LightLogo from '@/app/assets/flatbill-logo-light-mode.png'
 import ThemeToggle from './ThemeToggle';
 import DropdownMenu from './DropdownMenu';
-
-
+import { useTranslations } from "next-intl";
+import LanguageToggle from "./LanguageToggle";
 import HamburgerSheet from './HamburgerSheet';
 import ProfileMenuPopOver from './ProfileMenuPopOver';
 import { SkeletonAvatar } from './SkeletonAvatar';
@@ -14,6 +14,7 @@ import { authClient } from '@/lib/auth-client';
 
 
 const Navbar = () => {
+    const t = useTranslations("nav");
     const { data: session, isPending } = authClient.useSession()
     const user = session?.user
     return (
@@ -44,17 +45,18 @@ const Navbar = () => {
 
                 <div className='flex items-center justify-center gap-5'>
 
-                    <ul className='hidden sm:flex items-center justify-center gap-5'>
-                        <li>Home</li>
+                    <ul className='hidden md:flex items-center justify-center gap-5'>
+                        <li>{t("home")}</li>
                         <DropdownMenu />
-                        <li>About</li>
-                        <li>Contact</li>
+                        <li>{t("about")}</li>
+                        <li>{t("contact")}</li>
                     </ul>
                 </div>
-                <div className={`flex items-center justify-end gap-5`}>
+                <div className={`flex items-center justify-end gap-2 min-[380px]:gap-3 min-[400px]:gap-4 sm:gap-5 md:gap-5`}>
                     <ThemeToggle />
+                    <LanguageToggle />
 
-                    <div className='flex sm:hidden'>
+                    <div className='flex md:hidden'>
                         <HamburgerSheet />
                     </div>
 
@@ -69,9 +71,9 @@ const Navbar = () => {
                                     <Suspense><ProfileMenuSheet user={user} /></Suspense >
                                 </div> */}
                             </div> :
-                                <div className='hidden sm:flex items-center justify-center gap-5'>
-                                    <button className='rounded-md px-4 py-2 border border-[#155EEF] text-[#155EEF] font-bold cursor-pointer'>Log In</button>
-                                    <button className='rounded-md px-4 py-2 bg-[#155EEF] text-[#FFFFFF] hover:[#0047CC] font-bold cursor-pointer'>Register</button>
+                                <div className='hidden md:flex items-center justify-center gap-5'>
+                                    <button className='rounded-md px-4 py-2 border border-[#155EEF] text-[#155EEF] font-bold cursor-pointer'>{t("login")}</button>
+                                    <button className='rounded-md px-4 py-2 bg-[#155EEF] text-[#FFFFFF] hover:[#0047CC] font-bold cursor-pointer'>{t("register")}</button>
                                 </div>
                     }
 

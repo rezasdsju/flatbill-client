@@ -17,23 +17,25 @@ import {
     NavigationMenuList,
     NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
+import { useTranslations } from "next-intl"
 
 const features = [
-    { label: "Monthly Billing", href: "/#billing", icon: ReceiptIcon },
-    { label: "Online Payment", href: "/#payment", icon: CreditCardIcon },
-    { label: "Expense Tracking", href: "/#expenses", icon: WalletIcon },
-    { label: "Notice Board", href: "/#notices", icon: MegaphoneIcon },
-    { label: "Complaints", href: "/#complaints", icon: MessageSquareWarningIcon },
-    { label: "Reports", href: "/#reports", icon: ChartColumnIcon },
-]
+    { label: "monthlyBilling", href: "/#billing", icon: ReceiptIcon },
+    { label: "onlinePayment", href: "/#payment", icon: CreditCardIcon },
+    { label: "expenseTracking", href: "/#expenses", icon: WalletIcon },
+    { label: "noticeBoard", href: "/#notices", icon: MegaphoneIcon },
+    { label: "complaints", href: "/#complaints", icon: MessageSquareWarningIcon },
+    { label: "reports", href: "/#reports", icon: ChartColumnIcon },
+] as const
 
 type Props = { className?: string }
 const DropdownMenu = ({ className }: Props) => {
+    const t = useTranslations('features')
     return (
         <NavigationMenu className={className}>
             <NavigationMenuList >
                 <NavigationMenuItem>
-                    <NavigationMenuTrigger className={`font-sans text-base font-normal `}>Features</NavigationMenuTrigger>
+                    <NavigationMenuTrigger className={`font-sans text-base font-normal `}>{t('title')}</NavigationMenuTrigger>
                     <NavigationMenuContent>
                         <ul className="grid w-56">
                             {features.map(({ label, href, icon: Icon }) => (
@@ -42,7 +44,7 @@ const DropdownMenu = ({ className }: Props) => {
                                         render={
                                             <Link href={href} className="flex-row items-center gap-2">
                                                 <Icon />
-                                                {label}
+                                                {t(label)}
                                             </Link>
                                         }
                                     />
