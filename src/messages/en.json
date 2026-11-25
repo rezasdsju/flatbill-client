@@ -73,7 +73,15 @@
         "redirectingToGoogle": "Redirecting you to Google to finish signing in.",
         "namePlaceholder": "John Doe",
         "emailPlaceholder": "m@example.com",
-        "profilePreview": "Profile preview"
+        "profilePreview": "Profile preview",
+        "profilePhotoUploaded": "Profile photo uploaded",
+        "profilePhotoReady": "Your profile photo is ready.",
+        "imageUploadFailed": "Image upload failed",
+        "imageUploadFailedDescription": "Please choose a valid image and try again.",
+        "signOutFailed": "Sign-out failed",
+        "signOutFailedDescription": "An error occurred while signing out. Please try again.",
+        "signedOut": "Signed out successfully",
+        "signedOutDescription": "You have been securely signed out."
     },
     "authLayout": {
         "tagline": "BUILDING MANAGEMENT, SIMPLIFIED",

@@ -3,8 +3,10 @@
 
 import { toast } from "sonner"
 import { useState } from "react"
+import { useTranslations } from "next-intl"
 
 export const useImageUpload = () => {
+    const t = useTranslations("auth")
     const [imagePreview, setImagePreview] = useState("")
     const [imageUrl, setImageUrl] = useState("")
     const [isUploadingImage, setIsUploadingImage] = useState(false)
@@ -30,15 +32,15 @@ export const useImageUpload = () => {
                 throw new Error(result.message)
             }
             setImageUrl(result.imageUrl)
-            toast.success("Profile photo uploaded", {
-                description: "Your profile photo is ready.",
+            toast.success(t("profilePhotoUploaded"), {
+                description: t("profilePhotoReady"),
             })
         } catch (error) {
             console.error(error)
-            toast.error("Image upload failed", {
+            toast.error(t("imageUploadFailed"), {
                 description: error instanceof Error
                     ? error.message
-                    : "Please choose a valid image and try again.",
+                    : t("imageUploadFailedDescription"),
             })
 
         } finally {

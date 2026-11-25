@@ -4,11 +4,13 @@ import { toast } from "sonner";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 
 
 
 const useSignOut = () => {
+    const t = useTranslations("auth")
     const [isSigningOut, setIsSigningOut] = useState(false)
 
     const router = useRouter()
@@ -21,16 +23,16 @@ const useSignOut = () => {
         if (error) {
             setIsSigningOut(false)
 
-            toast.error("Sign-out failed", {
-                description: error.message || "An error occurred while signing out. Please try again.",
+            toast.error(t("signOutFailed"), {
+                description: error.message || t("signOutFailedDescription"),
             })
 
             return
         }
 
         if (data) {
-            toast.success("Signed out successfully", {
-                description: "You have been securely signed out.",
+            toast.success(t("signedOut"), {
+                description: t("signedOutDescription"),
             })
 
             router.replace("/sign-in")

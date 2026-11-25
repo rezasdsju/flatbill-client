@@ -73,7 +73,15 @@
         "redirectingToGoogle": "sign-in সম্পন্ন করতে Google-এ পাঠানো হচ্ছে।",
         "namePlaceholder": "আপনার নাম",
         "emailPlaceholder": "m@example.com",
-        "profilePreview": "প্রোফাইল ছবির প্রিভিউ"
+        "profilePreview": "প্রোফাইল ছবির প্রিভিউ",
+        "profilePhotoUploaded": "প্রোফাইল ছবি আপলোড হয়েছে",
+        "profilePhotoReady": "আপনার প্রোফাইল ছবি প্রস্তুত।",
+        "imageUploadFailed": "ছবি আপলোড করা যায়নি",
+        "imageUploadFailedDescription": "সঠিক ছবি নির্বাচন করে আবার চেষ্টা করুন।",
+        "signOutFailed": "সাইন আউট করা যায়নি",
+        "signOutFailedDescription": "সাইন আউট করার সময় সমস্যা হয়েছে। আবার চেষ্টা করুন।",
+        "signedOut": "সফলভাবে সাইন আউট হয়েছে",
+        "signedOutDescription": "আপনি নিরাপদে সাইন আউট করেছেন।"
     },
     "authLayout": {
         "tagline": "সহজভাবে বিল্ডিং পরিচালনা",
