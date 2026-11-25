@@ -24,6 +24,7 @@ import { useState } from "react"
 import { toast } from "sonner"
 import { Eye, EyeOff, ImagePlus, LockKeyhole } from "lucide-react"
 import Link from "next/link"
+import { useTranslations } from "next-intl"
 
 
 interface Props {
@@ -31,7 +32,7 @@ interface Props {
 }
 const AuthForm = ({ mode }: Props) => {
     const { imagePreview, imageUrl, isUploadingImage, handleImageChange } = useImageUpload()
-
+    const t = useTranslations('auth')
     const isRegister = mode === 'register'
     const router = useRouter()
     const [clickedToAuthButton, setClickedToAuthButton] = useState(false)
@@ -48,12 +49,12 @@ const AuthForm = ({ mode }: Props) => {
             const password = userData.password as string
             const password1 = userData.password1 as string
             if (!password || !password1) {
-                toast.error('Please enter password')
+                toast.error(t("passwordRequired"))
                 return
             }
             if (password !== password1) {
-                toast.error("Passwords do not match", {
-                    description: "Please confirm that both passwords are identical.",
+                toast.error(t("passwordMismatch"), {
+                    description: t("passwordMismatchDescription"),
                 });
                 return;
             }
@@ -63,8 +64,8 @@ const AuthForm = ({ mode }: Props) => {
                 !/[A-Z]/.test(password) ||
                 !/[a-z]/.test(password)
             ) {
-                toast.error("Password requirements not met", {
-                    description: "Use at least 8 characters, including an uppercase and a lowercase letter.",
+                toast.error(t("passwordRequirements"), {
+                    description: t("passwordRequirementsDescription"),
                 })
                 return
             }
@@ -76,15 +77,16 @@ const AuthForm = ({ mode }: Props) => {
                 ...(imageUrl ? { image: imageUrl } : {})
             })
             if (error) {
-                toast.error("Account creation failed", {
-                    description: error.message || "We couldn't create your account. Please try again.",
+                toast.error(t("accountCreationFailed"), {
+                    description: error.message || t("accountCreationFailedDescription"),
                 })
                 setClickedToAuthButton(false)
             }
             if (data) {
-                toast.success("Account created successfully", {
-                    description: "Redirecting you to the homepage.",
+                toast.success(t("accountCreated"), {
+                    description: t("redirecting"),
                 })
+                setClickedToAuthButton(false)
                 router.push('/')
 
             }
@@ -96,15 +98,16 @@ const AuthForm = ({ mode }: Props) => {
                 password: userData.password as string
             })
             if (error) {
-                toast.error("Sign-in failed", {
-                    description: error.message || "Please check your email and password, then try again.",
+                toast.error(t("signInFailed"), {
+                    description: error.message || t("signInFailedDescription"),
                 })
                 setClickedToAuthButton(false)
             }
             if (data) {
-                toast.success("Signed in successfully", {
-                    description: "Redirecting you to the homepage.",
+                toast.success(t("signInSuccess"), {
+                    description: t("redirecting"),
                 })
+                setClickedToAuthButton(false)
                 router.push('/')
             }
         }
@@ -116,14 +119,14 @@ const AuthForm = ({ mode }: Props) => {
             provider: 'google'
         })
         if (error) {
-            toast.error("Google sign-in failed", {
-                description: error.message || "Please try again or choose another sign-in method.",
+            toast.error(t("googleSignInFailed"), {
+                description: error.message || t("googleSignInFailedDescription"),
             })
             setClickedToAuthButton(false)
         }
         if (data) {
-            toast.success("Google sign-in started", {
-                description: "Redirecting you to Google to finish signing in.",
+            toast.success(t("googleSignInStarted"), {
+                description: t("redirectingToGoogle"),
             })
         }
     }
@@ -135,12 +138,12 @@ const AuthForm = ({ mode }: Props) => {
                 </div>
                 <div className="space-y-1.5">
                     <CardTitle className="text-2xl font-semibold tracking-tight sm:text-3xl">
-                        {isRegister ? "Create an Account" : "Welcome Back"}
+                        {isRegister ? t("createAccount") : t("welcomeBack")}
                     </CardTitle>
                     <CardDescription className="max-w-sm text-sm leading-6">
                         {isRegister
-                            ? "Enter your details below to create your FlatBill account"
-                            : "Sign in to manage your building bills and service charges"}
+                            ? t("registerDescription")
+                            : t("loginDescription")}
                     </CardDescription>
                 </div>
             </CardHeader>
@@ -149,31 +152,30 @@ const AuthForm = ({ mode }: Props) => {
                     <FieldGroup className="gap-4 sm:gap-5">
                         {isRegister && (
                             <Field className="gap-2">
-                                <FieldLabel className="text-sm font-medium" htmlFor="name">Full Name</FieldLabel>
+                                <FieldLabel className="text-sm font-medium" htmlFor="name">{t("fullName")}</FieldLabel>
                                 <Input
                                     className="h-11 bg-background/80 px-3"
                                     name="name"
                                     id="name"
                                     type="text"
-                                    placeholder="John Doe"
+                                    placeholder={t("namePlaceholder")}
                                     required
                                 />
                             </Field>
                         )}
 
                         <Field className="gap-2">
-                            <FieldLabel className="text-sm font-medium" htmlFor="email">Email</FieldLabel>
+                            <FieldLabel className="text-sm font-medium" htmlFor="email">{t("email")}</FieldLabel>
                             <Input
                                 className="h-11 bg-background/80 px-3"
                                 name="email"
                                 id="email"
                                 type="email"
-                                placeholder="m@example.com"
+                                placeholder={t("emailPlaceholder")}
                                 required
                             />
                             <FieldDescription className="text-xs leading-5">
-                                We&apos;ll use this to contact you. We will not share your email
-                                with anyone else.
+                                {t("emailDescription")}
                             </FieldDescription>
                         </Field>
 
@@ -183,7 +185,7 @@ const AuthForm = ({ mode }: Props) => {
                                     {imagePreview ? (
                                         <img
                                             src={imagePreview}
-                                            alt="Profile preview"
+                                            alt={t("profilePreview")}
                                             className="size-16 rounded-2xl object-cover ring-1 ring-border sm:size-18"
                                         />
                                     ) : (
@@ -193,7 +195,7 @@ const AuthForm = ({ mode }: Props) => {
                                     )}
                                 </div>
                                 <Field className="gap-2">
-                                    <FieldLabel className="text-sm font-medium" htmlFor="image">Profile Photo</FieldLabel>
+                                    <FieldLabel className="text-sm font-medium" htmlFor="image">{t("profilePhoto")}</FieldLabel>
                                     <Input
                                         className="h-11 bg-background/80 text-xs file:mr-3 file:rounded-md file:border-0 file:bg-primary/10 file:px-3 file:py-1 file:font-medium file:text-primary hover:file:bg-primary/15"
                                         name="image"
@@ -204,17 +206,17 @@ const AuthForm = ({ mode }: Props) => {
                                     />
                                     <FieldDescription className="text-xs">
                                         {isUploadingImage
-                                            ? "Uploading image..."
+                                            ? t("uploadingImage")
                                             : imageUrl
-                                                ? "Image uploaded successfully."
-                                                : "Upload your profile photo"}
+                                                ? t("imageUploaded")
+                                                : t("uploadPhoto")}
                                     </FieldDescription>
                                 </Field>
                             </div>
                         )}
 
                         <Field className="gap-2">
-                            <FieldLabel className="text-sm font-medium" htmlFor="password">Password</FieldLabel>
+                            <FieldLabel className="text-sm font-medium" htmlFor="password">{t("password")}</FieldLabel>
                             <div className="relative">
                                 <Input
                                     className="h-11 bg-background/80 px-3 pr-12"
@@ -226,7 +228,7 @@ const AuthForm = ({ mode }: Props) => {
                                 <button
                                     type="button"
                                     className="absolute inset-y-0 right-0 flex w-11 items-center justify-center rounded-r-lg text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                                    aria-label={showPassword ? "Hide password" : "Show password"}
+                                    aria-label={showPassword ? t("hidePassword") : t("showPassword")}
                                     aria-pressed={showPassword}
                                     onClick={() => setShowPassword((visible) => !visible)}
                                 >
@@ -236,14 +238,14 @@ const AuthForm = ({ mode }: Props) => {
                                 </button>
                             </div>
                             <FieldDescription className="text-xs">
-                                Must be at least 8 characters long.
+                                {t("passwordHint")}
                             </FieldDescription>
                         </Field>
 
                         {isRegister && (
                             <Field className="gap-2">
                                 <FieldLabel className="text-sm font-medium" htmlFor="confirm-password">
-                                    Confirm Password
+                                    {t("confirmPassword")}
                                 </FieldLabel>
                                 <div className="relative">
                                     <Input
@@ -256,7 +258,7 @@ const AuthForm = ({ mode }: Props) => {
                                     <button
                                         type="button"
                                         className="absolute inset-y-0 right-0 flex w-11 items-center justify-center rounded-r-lg text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                                        aria-label={showConfirmPassword ? "Hide confirm password" : "Show confirm password"}
+                                        aria-label={showConfirmPassword ? t("hideConfirmPassword") : t("showConfirmPassword")}
                                         aria-pressed={showConfirmPassword}
                                         onClick={() => setShowConfirmPassword((visible) => !visible)}
                                     >
@@ -266,7 +268,7 @@ const AuthForm = ({ mode }: Props) => {
                                     </button>
                                 </div>
                                 <FieldDescription className="text-xs">
-                                    Please confirm your password.
+                                    {t("confirmPasswordHint")}
                                 </FieldDescription>
                             </Field>
                         )}
@@ -278,8 +280,8 @@ const AuthForm = ({ mode }: Props) => {
                                 type="submit"
                             >
                                 {isRegister
-                                    ? (clickedToAuthButton ? "Creating Account..." : "Create Account")
-                                    : (clickedToAuthButton ? "Signing In..." : "Sign In")}
+                                    ? (clickedToAuthButton ? t("creatingAccount") : t("createAccountButton"))
+                                    : (clickedToAuthButton ? t("signingIn") : t("signIn"))}
                             </Button>
                             <Button
                                 onClick={handleGoogleSignIn}
@@ -289,20 +291,20 @@ const AuthForm = ({ mode }: Props) => {
                                 type="button"
                             >
                                 <span className="mr-2 text-base font-semibold" aria-hidden="true">G</span>
-                                Continue with Google
+                                {t("googleSignIn")}
                             </Button>
                             {isRegister ? (
                                 <FieldDescription className="pt-1 text-center">
-                                    Already have an account?{" "}
+                                    {t("alreadyAccount")}{" "}
                                     <Link href={`sign-in`} className="font-semibold text-primary underline-offset-4 hover:underline" >
-                                        Sign in
+                                        {t("signInLink")}
                                     </Link>
                                 </FieldDescription>
                             ) : (
                                 <FieldDescription className="pt-1 text-center">
-                                    Don&apos;t have an account?{" "}
+                                    {t("noAccount")}{" "}
                                     <Link href={`register`} className="font-semibold text-primary underline-offset-4 hover:underline">
-                                        Register
+                                        {t("register")}
                                     </Link>
                                 </FieldDescription>
                             )}

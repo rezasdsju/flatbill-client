@@ -1,12 +1,14 @@
 import React from "react";
-
-const authHighlights = [
-  "Track building charges",
-  "Stay on top of payments",
-  "Keep notices and updates together",
-];
+import { useTranslations } from "next-intl";
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
+  const t = useTranslations("authLayout");
+  const authHighlights = [
+    t("trackCharges"),
+    t("stayOnTopOfPayments"),
+    t("keepUpdatesTogether"),
+  ];
+
   return (
     <main className="relative isolate flex flex-1 items-center justify-center overflow-hidden bg-muted/30 px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -28,14 +30,13 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           <div className="relative">
             <div className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/20 bg-primary-foreground/10 px-3 py-1.5 text-xs font-medium tracking-wide text-primary-foreground/80">
               <span className="size-1.5 rounded-full bg-primary-foreground" />
-              BUILDING MANAGEMENT, SIMPLIFIED
+              {t("tagline")}
             </div>
             <h1 className="mt-10 max-w-md text-4xl font-semibold leading-tight tracking-tight xl:text-5xl">
-              A better way to manage your building.
+              {t("headline")}
             </h1>
             <p className="mt-5 max-w-sm text-base leading-7 text-primary-foreground/70">
-              Bring building charges, payments, and community updates together
-                in one simple place.
+              {t("description")}
             </p>
           </div>
 
