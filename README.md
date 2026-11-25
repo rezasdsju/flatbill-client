@@ -14,6 +14,29 @@ FlatBill helps flat owners' committees and building managers handle monthly serv
 
 ---
 
+## ✨ Features
+
+### 🏠 Homepage
+- Modern homepage with responsive hero banner
+- Clear CTA buttons and feature highlights
+
+### 🧭 Responsive Navbar
+- Theme and language toggle (English/Bangla)
+- Profile popover menu
+- Hamburger menu for mobile devices
+
+### 🎨 Theme & Language
+- Light and dark mode support
+- Cookie-based language preference
+- Dynamic English and Bangla content
+
+### 📱 Responsive Design
+- Mobile-first layout
+- Responsive navbar and banner
+- Optimized for mobile, tablet, and desktop
+
+
+
 ## Planned Features
 
 ### Admin (Building Manager or Committee)
@@ -54,7 +77,7 @@ FlatBill helps flat owners' committees and building managers handle monthly serv
 
 ---
 
-## Tech Stack
+## 🛠️ Tech Stack
 
 | Category | Technology |
 |---|---|
@@ -63,8 +86,8 @@ FlatBill helps flat owners' committees and building managers handle monthly serv
 | Styling | Tailwind CSS |
 | UI Components | shadcn/ui |
 | Icons | React Icons |
-
----
+| Internationalization | next-intl |
+| Theme Management | next-themes |
 
 ## Local Development
 
