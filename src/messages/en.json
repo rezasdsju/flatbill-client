@@ -1,0 +1,29 @@
+{
+    "hero": {
+        "badge": "Smart Flat Management",
+        "headingLead": "Smarter Solution for Your",
+        "headingHighlight": "Apartment Society.",
+        "description": "Manage monthly bills, collect payments, track expenses, share important notices, and handle resident complaints, all in one simple platform.",
+        "getStarted": "Get Started",
+        "watchDemo": "Watch Demo",
+        "secure": "Secure & Reliable",
+        "easy": "Easy to Use",
+        "community": "Better Community"
+    },
+    "nav": {
+        "home": "Home",
+        "about": "About",
+        "contact": "Contact",
+        "login": "Log In",
+        "register": "Register"
+    },
+    "features": {
+        "title": "Features",
+        "monthlyBilling": "Monthly Billing",
+        "onlinePayment": "Online Payment",
+        "expenseTracking": "Expense Tracking",
+        "noticeBoard": "Notice Board",
+        "complaints": "Complaints",
+        "reports": "Reports"
+    }
+}
