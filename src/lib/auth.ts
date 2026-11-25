@@ -10,6 +10,15 @@ export const auth = betterAuth({
     emailAndPassword: {
         enabled: true,
     },
+    user: {
+        additionalFields: {
+            role: {
+                type: ["super-admin", "association-admin", "caretaker", "flat-owner", "tenant"],
+                defaultValue: 'tenant',
+                input: false
+            }
+        }
+    },
     socialProviders: {
         google: {
             clientId: process.env.GOOGLE_CLIENT_ID as string,
