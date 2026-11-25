@@ -93,14 +93,14 @@ export default function DashboardSideBar() {
     const t = useTranslations("dashboardSidebar")
     const { data: session, isPending } = authClient.useSession()
     const user = session?.user
-    // const role = session?.user?.role || 'tenant'
+    const role = session?.user?.role || 'tenant'
     return (
         <Sidebar collapsible="icon">
             <SidebarHeader />
             <SidebarContent>
                 <SidebarGroup />
                 <SidebarMenu>
-                    {sideBarItems['flat-owner'].map((item) => (
+                    {sideBarItems[role].map((item) => (
                         <SidebarMenuItem key={item.name}>
                             <SidebarMenuButton render={<Link href={item.url} />}>
                                 <item.icon />
