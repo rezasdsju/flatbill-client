@@ -6,6 +6,7 @@ import "./globals.css";
 import Navbar from "@/components/shared/navbar/Navbar";
 import ThemeProvider from "@/components/provider/ThemeProvider";
 import { Toaster } from "sonner";
+import Footer from "@/components/shared/footer/Footer";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -46,6 +47,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
           <NextIntlClientProvider>
             <Navbar />
             {children}
+            <Footer />
             <Toaster />
           </NextIntlClientProvider>
         </ThemeProvider>
