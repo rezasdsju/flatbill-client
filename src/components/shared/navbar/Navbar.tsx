@@ -52,7 +52,7 @@ const Navbar = () => {
                         <li>{t("contact")}</li>
                     </ul>
                 </div>
-                <div className={`flex items-center justify-end gap-2 min-[380px]:gap-3 min-[400px]:gap-4 sm:gap-5 md:gap-5`}>
+                <div className={`flex items-center justify-end gap-1 min-[325px]:gap-2 min-[380px]:gap-3 min-[400px]:gap-4 sm:gap-5 md:gap-5`}>
                     <ThemeToggle />
                     <LanguageToggle />
 

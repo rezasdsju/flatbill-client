@@ -38,8 +38,16 @@ export default function LanguageToggle() {
                 <span className="inline-flex items-center gap-2">
                     <span className="size-4 animate-spin rounded-full border-2 border-blue-500/30 border-t-blue-600" />
                 </span>
+            ) : locale === "en" ? (
+                <>
+                    <span className="min-[345px]:hidden">বাং</span>
+                    <span className="hidden min-[345px]:inline">বাংলা</span>
+                </>
             ) : (
-                locale === "en" ? "বাংলা" : "English"
+                <>
+                    <span className="min-[345px]:hidden">Eng</span>
+                    <span className="hidden min-[345px]:inline">English</span>
+                </>
             )}
         </button>
     );
