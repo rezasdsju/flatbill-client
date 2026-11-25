@@ -15,6 +15,7 @@ import DropdownMenu from "./DropdownMenu"
 import { authClient } from "@/lib/auth-client"
 import LoadingSkeleton from "./LoadingSkeleton"
 import { useTranslations } from "next-intl"
+import Link from "next/link"
 
 export default function HamburgerSheet() {
     const t = useTranslations('nav')
@@ -47,8 +48,8 @@ export default function HamburgerSheet() {
                         isPending ? <LoadingSkeleton /> :
                             !user &&
                             <div className="flex flex-col gap-2">
-                                <button className='rounded-md px-4 py-2 border border-[#155EEF] text-[#155EEF] font-bold cursor-pointer'>Log In</button>
-                                <button className='rounded-md px-4 py-2 bg-[#155EEF] text-[#FFFFFF] hover:[#0047CC] font-bold cursor-pointer'>Register</button>
+                                <Link href={`/sign-in`}><button className='rounded-md px-4 py-2 border border-[#155EEF] text-[#155EEF] font-bold cursor-pointer'>Log In</button></Link>
+                                <Link href={`/register`}><button className='rounded-md px-4 py-2 bg-[#155EEF] text-[#FFFFFF] hover:[#0047CC] font-bold cursor-pointer'>Register</button></Link>
                             </div>
                     }
                     {/* <SheetClose render={<Button variant="outline">Close</Button>} /> */}

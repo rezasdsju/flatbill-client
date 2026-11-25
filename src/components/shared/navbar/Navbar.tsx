@@ -10,6 +10,7 @@ import HamburgerSheet from './HamburgerSheet';
 import ProfileMenuPopOver from './ProfileMenuPopOver';
 import { SkeletonAvatar } from './SkeletonAvatar';
 import { authClient } from '@/lib/auth-client';
+import Link from 'next/link';
 
 
 
@@ -21,7 +22,7 @@ const Navbar = () => {
         <nav className='sticky top-0 z-50 h-16 bg-background border-b border-border py-2 sm:py-1'>
             <div className='flex items-center justify-between h-full px-1 sm:px-2 max-w-7xl mx-auto'>
                 <div className='flex items-center justify-start'>
-                    <div className='shrink-0'>
+                    <Link href={`/`} className='shrink-0'>
                         <Image
                             src={LightLogo}
                             alt='FlatBill'
@@ -39,7 +40,7 @@ const Navbar = () => {
                             className='hidden dark:block w-33 sm:w-35 h-auto'
                         />
 
-                    </div>
+                    </Link>
                 </div>
 
 
@@ -72,8 +73,8 @@ const Navbar = () => {
                                 </div> */}
                             </div> :
                                 <div className='hidden md:flex items-center justify-center gap-5'>
-                                    <button className='rounded-md px-4 py-2 border border-[#155EEF] text-[#155EEF] font-bold cursor-pointer'>{t("login")}</button>
-                                    <button className='rounded-md px-4 py-2 bg-[#155EEF] text-[#FFFFFF] hover:[#0047CC] font-bold cursor-pointer'>{t("register")}</button>
+                                    <Link href={`/sign-in`}><button className='rounded-md px-4 py-2 border border-[#155EEF] text-[#155EEF] font-bold cursor-pointer'>{t("login")}</button></Link>
+                                    <Link href={`/register`}><button className='rounded-md px-4 py-2 bg-[#155EEF] text-[#FFFFFF] hover:[#0047CC] font-bold cursor-pointer'>{t("register")}</button></Link>
                                 </div>
                     }
 
