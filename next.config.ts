@@ -2,8 +2,6 @@ import type { NextConfig } from "next";
 import createNextIntlPlugin from 'next-intl/plugin';
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  cacheComponents: true,
   devIndicators: false,
   partialPrefetching: true,
   reactCompiler: true,
