@@ -90,5 +90,12 @@
         "trackCharges": "Track building charges",
         "stayOnTopOfPayments": "Stay on top of payments",
         "keepUpdatesTogether": "Keep notices and updates together"
+    },
+    "footer": {
+        "description": "A simpler way to manage building bills, payments, and community updates—all in one place.",
+        "product": "Explore FlatBill",
+        "account": "Your account",
+        "copyright": "All rights reserved.",
+        "tagline": "Better-managed buildings start here."
     }
 }
