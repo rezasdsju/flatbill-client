@@ -28,6 +28,7 @@ import {
     Settings,
     ClipboardList,
     Home,
+    HousePlus,
     User2,
 } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
@@ -70,6 +71,7 @@ const sideBarItems = {
 
     "flat-owner": [
         { name: "dashboard", url: "/dashboard/flat-owner", icon: LayoutDashboard },
+        { name: "addFlats", url: "/dashboard/flat-owner/add-flat", icon: HousePlus },
         { name: "myFlats", url: "/dashboard/flat-owner/my-flats", icon: Home },
         { name: "myTenants", url: "/dashboard/flat-owner/tenants", icon: UserCheck },
         { name: "ownerBillsDues", url: "/dashboard/flat-owner/bills", icon: Receipt },
