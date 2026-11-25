@@ -3,7 +3,6 @@ import createNextIntlPlugin from 'next-intl/plugin';
 
 const nextConfig: NextConfig = {
   devIndicators: false,
-  partialPrefetching: true,
   reactCompiler: true,
   images: {
     remotePatterns: [
