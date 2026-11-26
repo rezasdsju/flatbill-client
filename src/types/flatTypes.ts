@@ -7,9 +7,9 @@ type FacingDirection = "South" | "North" | "East" | "West" | "South-East" | "Sou
 
 export interface UserSummary {
     _id: string;
-    name: string;
+    name: string | null;
     email: string;
-    phone?: string;
+    phone?: string | null;
     nid?: string;
 }
 
@@ -76,39 +76,39 @@ export interface IFlat {
 
 
 export interface IAddFlat {
-  // Mandatory Fields
-  buildingId?: string;
-  buildingName: string;
-  flatNumber: string;
-  floor: string;
-  rentalCategory: RentalCategory;
-  monthlyRent: number;
-  serviceCharge: number;
-  status: FlatStatus;
-  gasType: GasType;
-  electricityType: ElectricityType;
+    // Mandatory Fields
+    buildingId?: string;
+    buildingName: string;
+    flatNumber: string;
+    floor: string;
+    rentalCategory: RentalCategory;
+    monthlyRent: number;
+    serviceCharge: number;
+    status: FlatStatus;
+    gasType: GasType;
+    electricityType: ElectricityType;
 
-  // Optional Room & Space Specs
-  sizeSqFt?: number;
-  facing?: FacingDirection;
-  bedrooms?: number;
-  attachedBathrooms?: number;
-  commonBathrooms?: number;
-  balconies?: number;
-  hasDrawingDining?: boolean;
-  hasServantRoom?: boolean;
+    // Optional Room & Space Specs
+    sizeSqFt?: number;
+    facing?: FacingDirection;
+    bedrooms?: number;
+    attachedBathrooms?: number;
+    commonBathrooms?: number;
+    balconies?: number;
+    hasDrawingDining?: boolean;
+    hasServantRoom?: boolean;
 
-  // Optional Utilities & Amenities
-  gasMeterOrAccountNo?: string;
-  electricityMeterNo?: string;
-  hasParking?: boolean;
-  parkingSlotNo?: string;
-  hasLift?: boolean;
-  hasGenerator?: boolean;
+    // Optional Utilities & Amenities
+    gasMeterOrAccountNo?: string;
+    electricityMeterNo?: string;
+    hasParking?: boolean;
+    parkingSlotNo?: string;
+    hasLift?: boolean;
+    hasGenerator?: boolean;
 
-  // Optional Financial & Extra Info
-  securityDeposit?: number;
-  waterBillFixed?: number;
-  garbageBillFixed?: number;
-  notes?: string;
+    // Optional Financial & Extra Info
+    securityDeposit?: number;
+    waterBillFixed?: number;
+    garbageBillFixed?: number;
+    notes?: string;
 }
