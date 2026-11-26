@@ -291,5 +291,96 @@
             "uploadingImage": "ছবি আপলোড হচ্ছে...",
             "imageUploaded": "ছবি সফলভাবে আপলোড হয়েছে।"
         }
+    },
+    "flatDetail": {
+        "breadcrumb": "ফ্ল্যাটের বিস্তারিত",
+        "flatImage": "ফ্ল্যাটের ছবি",
+        "buildingImage": "বিল্ডিংয়ের ছবি",
+        "noFlatImage": "ফ্ল্যাটের কোনো ছবি নেই",
+        "noBuildingImage": "বিল্ডিংয়ের কোনো ছবি নেই",
+        "monthlyRent": "মাসিক ভাড়া",
+        "serviceCharge": "সার্ভিস চার্জ",
+        "currentDue": "বর্তমান বকেয়া",
+        "securityDeposit": "জামানত",
+        "basicInformation": "মৌলিক তথ্য",
+        "buildingName": "বিল্ডিংয়ের নাম",
+        "flatNumber": "ফ্ল্যাট নম্বর",
+        "floor": "তলা",
+        "rentalCategory": "ভাড়ার ধরন",
+        "facing": "ফ্ল্যাটের দিক",
+        "createdAt": "তৈরির তারিখ",
+        "roomDetails": "রুম ও জায়গার বিবরণ",
+        "size": "ফ্ল্যাটের আয়তন",
+        "sqFt": "বর্গফুট",
+        "bedrooms": "বেডরুম",
+        "totalBathrooms": "মোট বাথরুম",
+        "attachedBathrooms": "অ্যাটাচড বাথরুম",
+        "commonBathrooms": "কমন বাথরুম",
+        "balconies": "বারান্দা",
+        "drawingDining": "ড্রয়িং ও ডাইনিং রুম",
+        "servantRoom": "সার্ভেন্ট রুম",
+        "utilities": "ইউটিলিটি",
+        "gasType": "গ্যাসের ধরন",
+        "electricityType": "বিদ্যুতের ধরন",
+        "gasMeterNumber": "গ্যাস মিটার / অ্যাকাউন্ট নম্বর",
+        "electricityMeterNumber": "বিদ্যুৎ মিটার নম্বর",
+        "amenities": "সুযোগ-সুবিধা",
+        "parking": "পার্কিং সুবিধা",
+        "parkingSlot": "পার্কিং স্লট নম্বর",
+        "lift": "লিফট সুবিধা",
+        "generator": "জেনারেটর সুবিধা",
+        "additionalCharges": "অতিরিক্ত চার্জ",
+        "fixedWaterBill": "নির্ধারিত পানির বিল",
+        "fixedGarbageBill": "নির্ধারিত ময়লা বিল",
+        "currentBillStatus": "চলতি মাসের বিলের অবস্থা",
+        "updatedAt": "সর্বশেষ আপডেট",
+        "flatOwner": "ফ্ল্যাট মালিক",
+        "ownerName": "মালিকের নাম",
+        "email": "ইমেইল ঠিকানা",
+        "phone": "ফোন নম্বর",
+        "presentTenants": "বর্তমান ভাড়াটিয়া",
+        "pastTenants": "পূর্ববর্তী ভাড়াটিয়া",
+        "moveInDate": "উঠার তারিখ",
+        "moveOutDate": "ছাড়ার তারিখ",
+        "leaseEndDate": "চুক্তি শেষ হওয়ার তারিখ",
+        "roomOrSeatLabel": "রুম / সিট",
+        "noPresentTenants": "এই ফ্ল্যাটে বর্তমানে কোনো ভাড়াটিয়া নেই।",
+        "noPastTenants": "পূর্ববর্তী ভাড়াটিয়ার কোনো তথ্য নেই।",
+        "notes": "অতিরিক্ত তথ্য",
+        "statuses": {
+            "Occupied": "ভাড়াটিয়া আছে",
+            "Vacant": "খালি",
+            "Under Maintenance": "মেরামতাধীন"
+        },
+        "billStatuses": {
+            "Paid": "পরিশোধিত",
+            "Due": "বকেয়া",
+            "Partial": "আংশিক পরিশোধিত",
+            "N/A": "প্রযোজ্য নয়"
+        },
+        "rentalCategories": {
+            "Family": "পরিবার",
+            "Bachelor": "ব্যাচেলর",
+            "Office": "অফিস",
+            "Sublet": "সাবলেট"
+        },
+        "facingDirections": {
+            "South": "দক্ষিণ",
+            "North": "উত্তর",
+            "East": "পূর্ব",
+            "West": "পশ্চিম",
+            "South-East": "দক্ষিণ-পূর্ব",
+            "South-West": "দক্ষিণ-পশ্চিম"
+        },
+        "gasTypes": {
+            "Titas Line": "তিতাস লাইন",
+            "Prepaid Meter": "প্রিপেইড মিটার",
+            "Cylinder": "সিলিন্ডার"
+        },
+        "electricityTypes": {
+            "Prepaid": "প্রিপেইড",
+            "Postpaid": "পোস্টপেইড",
+            "Sub-meter": "সাব-মিটার"
+        }
     }
 }

@@ -291,5 +291,96 @@
             "uploadingImage": "Uploading image...",
             "imageUploaded": "Image uploaded successfully."
         }
+    },
+    "flatDetail": {
+        "breadcrumb": "Flat Details",
+        "flatImage": "Flat Image",
+        "buildingImage": "Building Image",
+        "noFlatImage": "No flat image available",
+        "noBuildingImage": "No building image available",
+        "monthlyRent": "Monthly Rent",
+        "serviceCharge": "Service Charge",
+        "currentDue": "Current Due",
+        "securityDeposit": "Security Deposit",
+        "basicInformation": "Basic Information",
+        "buildingName": "Building Name",
+        "flatNumber": "Flat Number",
+        "floor": "Floor",
+        "rentalCategory": "Rental Category",
+        "facing": "Facing Direction",
+        "createdAt": "Created At",
+        "roomDetails": "Room & Space Details",
+        "size": "Flat Size",
+        "sqFt": "sq ft",
+        "bedrooms": "Bedrooms",
+        "totalBathrooms": "Total Bathrooms",
+        "attachedBathrooms": "Attached Bathrooms",
+        "commonBathrooms": "Common Bathrooms",
+        "balconies": "Balconies",
+        "drawingDining": "Drawing & Dining Room",
+        "servantRoom": "Servant Room",
+        "utilities": "Utilities",
+        "gasType": "Gas Type",
+        "electricityType": "Electricity Type",
+        "gasMeterNumber": "Gas Meter / Account Number",
+        "electricityMeterNumber": "Electricity Meter Number",
+        "amenities": "Amenities",
+        "parking": "Parking Available",
+        "parkingSlot": "Parking Slot Number",
+        "lift": "Lift Available",
+        "generator": "Generator Available",
+        "additionalCharges": "Additional Charges",
+        "fixedWaterBill": "Fixed Water Bill",
+        "fixedGarbageBill": "Fixed Garbage Bill",
+        "currentBillStatus": "Current Month Bill Status",
+        "updatedAt": "Last Updated",
+        "flatOwner": "Flat Owner",
+        "ownerName": "Owner Name",
+        "email": "Email Address",
+        "phone": "Phone Number",
+        "presentTenants": "Present Tenants",
+        "pastTenants": "Past Tenants",
+        "moveInDate": "Move-in Date",
+        "moveOutDate": "Move-out Date",
+        "leaseEndDate": "Lease End Date",
+        "roomOrSeatLabel": "Room / Seat",
+        "noPresentTenants": "No tenants currently assigned to this flat.",
+        "noPastTenants": "No previous tenant records available.",
+        "notes": "Additional Notes",
+        "statuses": {
+            "Occupied": "Occupied",
+            "Vacant": "Vacant",
+            "Under Maintenance": "Under Maintenance"
+        },
+        "billStatuses": {
+            "Paid": "Paid",
+            "Due": "Due",
+            "Partial": "Partially Paid",
+            "N/A": "Not Applicable"
+        },
+        "rentalCategories": {
+            "Family": "Family",
+            "Bachelor": "Bachelor",
+            "Office": "Office",
+            "Sublet": "Sublet"
+        },
+        "facingDirections": {
+            "South": "South",
+            "North": "North",
+            "East": "East",
+            "West": "West",
+            "South-East": "South-East",
+            "South-West": "South-West"
+        },
+        "gasTypes": {
+            "Titas Line": "Titas Line",
+            "Prepaid Meter": "Prepaid Meter",
+            "Cylinder": "Cylinder"
+        },
+        "electricityTypes": {
+            "Prepaid": "Prepaid",
+            "Postpaid": "Postpaid",
+            "Sub-meter": "Sub-meter"
+        }
     }
 }
