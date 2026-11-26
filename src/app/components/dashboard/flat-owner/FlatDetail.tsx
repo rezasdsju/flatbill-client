@@ -21,13 +21,15 @@ import {
     FileText,
     Home,
     ArrowUpDown,
+    Pencil,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import type { IFlat } from "@/types/flatTypes";
+import { useState } from "react";
 
 const FlatDetail = ({ flat }: { flat: IFlat }) => {
     const t = useTranslations("flatDetail");
-
+    const [edit, setEdit] = useState(false)
     const formatMoney = (amount?: number) => {
         if (amount === undefined || amount === null) return "—";
 
@@ -87,12 +89,14 @@ const FlatDetail = ({ flat }: { flat: IFlat }) => {
         title,
         icon,
         children,
+        className = ""
     }: {
         title: string;
         icon: React.ReactNode;
         children: React.ReactNode;
+        className?: string
     }) => (
-        <section className="rounded-xl border border-border bg-card p-4 shadow-sm sm:p-5">
+        <section className={`rounded-xl border border-border bg-card p-4 shadow-sm sm:p-5 ${className}`}>
             <div className="mb-5 flex items-center gap-2">
                 <span className="text-primary">{icon}</span>
                 <h2 className="text-base font-semibold text-foreground">
@@ -124,18 +128,32 @@ const FlatDetail = ({ flat }: { flat: IFlat }) => {
         <div className="min-h-screen bg-background px-3 py-5 text-foreground sm:px-5 sm:py-7 lg:px-8">
             <div className="mx-auto max-w-7xl space-y-6">
                 {/* Header */}
-                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                    <div>
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                    <div className="min-w-0">
                         <p className="text-sm text-muted-foreground">
                             {t("breadcrumb")}
                         </p>
-                        <h1 className="mt-1 text-2xl font-bold tracking-tight sm:text-3xl">
-                            {flat.buildingName} - {flat.flatNumber}
-                        </h1>
+
+                        <div className="mt-1 flex flex-wrap items-center gap-3">
+                            <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
+                                {flat.buildingName} - {flat.flatNumber}
+                            </h1>
+
+                            <button
+                                type="button"
+                                onClick={() => setEdit((current) => !current)}
+                                aria-label={edit ? "Cancel editing flat" : "Edit flat"}
+                                className="inline-flex h-9 items-center gap-2 rounded-lg border border-border bg-background px-3 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer"
+                            >
+                                <Pencil className="size-4" aria-hidden="true" />
+                                <span>{edit ? "Cancel" : "Edit"}</span>
+                            </button>
+                        </div>
+
                         <div className="mt-2 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
-                            <MapPin className="size-4" />
+                            <MapPin className="size-4 shrink-0" aria-hidden="true" />
                             <span>{flat.floor}</span>
-                            <span>•</span>
+                            <span aria-hidden="true">•</span>
                             <span>{t(`rentalCategories.${flat.rentalCategory}`)}</span>
                         </div>
                     </div>
@@ -156,8 +174,11 @@ const FlatDetail = ({ flat }: { flat: IFlat }) => {
 
                 {/* Images */}
                 <div className="grid gap-4 md:grid-cols-2">
-                    <div className="overflow-hidden rounded-xl border border-border bg-card">
-                        <div className="relative aspect-video bg-muted">
+                    <div className="overflow-hidden rounded-xl border border-border bg-card ">
+                        <div className={`relative aspect-video bg-muted `}>
+                            <Pencil className={`absolute right-3 top-3 z-10 size-5 text-white cursor-pointer ${!edit && 'hidden'}`} />
+
+
                             {flat.flatImage ? (
                                 <Image
                                     src={flat.flatImage}
@@ -181,6 +202,8 @@ const FlatDetail = ({ flat }: { flat: IFlat }) => {
 
                     <div className="overflow-hidden rounded-xl border border-border bg-card">
                         <div className="relative aspect-video bg-muted">
+                            <Pencil className={`absolute right-3 top-3 z-10 size-5 text-white cursor-pointer ${!edit && 'hidden'}`} />
+
                             {flat.buildingImage ? (
                                 <Image
                                     src={flat.buildingImage}
@@ -229,8 +252,12 @@ const FlatDetail = ({ flat }: { flat: IFlat }) => {
                     ].map((item) => (
                         <div
                             key={item.label}
-                            className="rounded-xl border border-border bg-card p-4 shadow-sm"
+                            className="relative rounded-xl border border-border bg-card p-4 shadow-sm"
+
                         >
+                            <Pencil className={`absolute right-3 top-3 z-10 size-5 text-white cursor-pointer ${!edit && 'hidden'}`} />
+
+
                             <div className="flex items-center justify-between gap-3">
                                 <p className="text-xs text-muted-foreground">
                                     {item.label}
@@ -246,7 +273,10 @@ const FlatDetail = ({ flat }: { flat: IFlat }) => {
 
                 <div className="grid gap-5 lg:grid-cols-2">
                     {/* Basic information */}
-                    <Section title={t("basicInformation")} icon={<Building2 className="size-5" />}>
+                    <Section className="relative" title={t("basicInformation")} icon={<Building2 className="size-5" />}>
+                        <Pencil className={`absolute right-3 top-3 z-10 size-5 text-white cursor-pointer ${!edit && 'hidden'}`} />
+
+
                         <div className="grid grid-cols-2 gap-x-4 gap-y-5 sm:grid-cols-3">
                             <InfoItem label={t("buildingName")} value={flat.buildingName} />
                             <InfoItem label={t("flatNumber")} value={flat.flatNumber} />
@@ -267,7 +297,10 @@ const FlatDetail = ({ flat }: { flat: IFlat }) => {
                     </Section>
 
                     {/* Room specifications */}
-                    <Section title={t("roomDetails")} icon={<Ruler className="size-5" />}>
+                    <Section className="relative" title={t("roomDetails")} icon={<Ruler className="size-5" />}>
+                        <Pencil className={`absolute right-3 top-3 z-10 size-5 text-white cursor-pointer ${!edit && 'hidden'}`} />
+
+
                         <div className="grid grid-cols-2 gap-x-4 gap-y-5 sm:grid-cols-3">
                             <InfoItem
                                 label={t("size")}
@@ -293,7 +326,10 @@ const FlatDetail = ({ flat }: { flat: IFlat }) => {
                     </Section>
 
                     {/* Utilities */}
-                    <Section title={t("utilities")} icon={<Zap className="size-5" />}>
+                    <Section className="relative" title={t("utilities")} icon={<Zap className="size-5" />}>
+                        <Pencil className={`absolute right-3 top-3 z-10 size-5 text-white cursor-pointer ${!edit && 'hidden'}`} />
+
+
                         <div className="grid grid-cols-2 gap-x-4 gap-y-5">
                             <InfoItem
                                 label={t("gasType")}
@@ -315,7 +351,10 @@ const FlatDetail = ({ flat }: { flat: IFlat }) => {
                     </Section>
 
                     {/* Amenities */}
-                    <Section title={t("amenities")} icon={<Car className="size-5" />}>
+                    <Section className="relative" title={t("amenities")} icon={<Car className="size-5" />}>
+                        <Pencil className={`absolute right-3 top-3 z-10 size-5 text-white cursor-pointer ${!edit && 'hidden'}`} />
+
+
                         <div className="grid gap-2 sm:grid-cols-2">
                             <BooleanItem label={t("parking")} value={flat.hasParking} />
                             <BooleanItem label={t("lift")} value={flat.hasLift} />
@@ -333,7 +372,10 @@ const FlatDetail = ({ flat }: { flat: IFlat }) => {
                     </Section>
 
                     {/* Additional charges */}
-                    <Section title={t("additionalCharges")} icon={<Wallet className="size-5" />}>
+                    <Section className="relative" title={t("additionalCharges")} icon={<Wallet className="size-5" />}>
+                        <Pencil className={`absolute right-3 top-3 z-10 size-5 text-white cursor-pointer ${!edit && 'hidden'}`} />
+
+
                         <div className="grid grid-cols-2 gap-x-4 gap-y-5">
                             <InfoItem
                                 label={t("fixedWaterBill")}
@@ -355,7 +397,10 @@ const FlatDetail = ({ flat }: { flat: IFlat }) => {
                     </Section>
 
                     {/* Flat owner */}
-                    <Section title={t("flatOwner")} icon={<UserRound className="size-5" />}>
+                    <Section className="relative" title={t("flatOwner")} icon={<UserRound className="size-5" />}>
+                        <Pencil className={`absolute right-3 top-3 z-10 size-5 text-white cursor-pointer ${!edit && 'hidden'}`} />
+
+
                         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                             <InfoItem
                                 label={t("ownerName")}
@@ -374,7 +419,10 @@ const FlatDetail = ({ flat }: { flat: IFlat }) => {
                 </div>
 
                 {/* Present tenants */}
-                <Section title={t("presentTenants")} icon={<UserRound className="size-5" />}>
+                <Section className="relative" title={t("presentTenants")} icon={<UserRound className="size-5" />}>
+                    <Pencil className={`absolute right-3 top-3 z-10 size-5 text-white cursor-pointer ${!edit && 'hidden'}`} />
+
+
                     {flat.presentTenants?.length ? (
                         <div className="grid gap-3 md:grid-cols-2">
                             {flat.presentTenants.map((tenant) => (
@@ -410,7 +458,10 @@ const FlatDetail = ({ flat }: { flat: IFlat }) => {
                 </Section>
 
                 {/* Past tenants */}
-                <Section title={t("pastTenants")} icon={<ArrowUpDown className="size-5" />}>
+                <Section className="relative" title={t("pastTenants")} icon={<ArrowUpDown className="size-5" />}>
+                    <Pencil className={`absolute right-3 top-3 z-10 size-5 text-white cursor-pointer ${!edit && 'hidden'}`} />
+
+
                     {flat.pastTenants?.length ? (
                         <div className="grid gap-3 md:grid-cols-2">
                             {flat.pastTenants.map((tenant) => (
