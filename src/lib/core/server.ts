@@ -36,9 +36,10 @@ export const getToken = async () => {
     return token
 }
 
-export const requireRole = async () => {
+type UserRole = 'flat-owner' | 'super-admin' | 'tenant' | 'caretaker' | 'association-admin'
+export const requireRole = async (userRole: UserRole) => {
     const session = await getSessionForServerSide()
-    if (!session || !session?.user?.role) {
+    if (!session || session?.user?.role !== userRole) {
         redirect('/unauthorized')
     }
     return session
