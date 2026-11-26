@@ -187,7 +187,7 @@ const EditFlat = ({ flat }: { flat: IFlat }) => {
 
         try {
             const result = await updateFlat(flat._id, flatData)
-            console.log(result)
+            // console.log(result)
             if (result.success) {
                 toast.success(t("notifications.success"))
                 router.replace('/dashboard/flat-owner/my-flats')

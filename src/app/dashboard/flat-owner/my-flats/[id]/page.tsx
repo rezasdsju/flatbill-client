@@ -6,7 +6,7 @@ import { getFlatByFlatOwnerById } from "@/lib/api/flats";
 const FlatDetailPage = async({params}:{params: Promise<{ id: string }>}) => {
     const {id} = await params
     const flat = await getFlatByFlatOwnerById(id)
-    console.log(flat)
+    // console.log(flat)
     return (
         <div>
             <FlatDetail flat={flat}/>
