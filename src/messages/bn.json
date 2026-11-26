@@ -179,7 +179,8 @@
             "assign": "বরাদ্দ করুন",
             "details": "বিস্তারিত",
             "assignTenant": "ভাড়াটিয়া বরাদ্দ করুন",
-            "viewDetails": "বিস্তারিত দেখুন"
+            "viewDetails": "বিস্তারিত দেখুন",
+            "edit": "এডিট"
         }
     },
     "addFlat": {
@@ -192,7 +193,8 @@
             "open": "নতুন ফ্ল্যাট যোগ করুন",
             "cancel": "বাতিল",
             "adding": "যোগ করা হচ্ছে...",
-            "addFlat": "ফ্ল্যাট যোগ করুন"
+            "addFlat": "ফ্ল্যাট যোগ করুন",
+            "edit": "এডিট"
         },
         "dialog": {
             "title": "ফ্ল্যাট যোগ করুন",
@@ -381,6 +383,111 @@
             "Prepaid": "প্রিপেইড",
             "Postpaid": "পোস্টপেইড",
             "Sub-meter": "সাব-মিটার"
+        }
+    },
+    "editFlat": {
+        "actions": {
+            "edit": "সম্পাদনা",
+            "cancel": "বাতিল",
+            "saving": "সংরক্ষণ হচ্ছে...",
+            "saveChanges": "পরিবর্তন সংরক্ষণ করুন"
+        },
+        "dialog": {
+            "title": "ফ্ল্যাট সম্পাদনা করুন",
+            "description": "নিচে ফ্ল্যাটের তথ্য হালনাগাদ করুন।",
+            "required": " চিহ্নিত ঘরগুলো আবশ্যক।"
+        },
+        "sections": {
+            "requiredDetails": "আবশ্যক তথ্য",
+            "requiredDetailsDescription": "ফ্ল্যাটের মৌলিক তথ্য ও ইউটিলিটির ধরন।",
+            "roomSpaceDetails": "কক্ষ ও স্থানসংক্রান্ত তথ্য",
+            "roomSpaceDetailsDescription": "ফ্ল্যাটের বিন্যাস বোঝাতে ঐচ্ছিক তথ্য দিন।",
+            "utilitiesAmenities": "ইউটিলিটি ও সুবিধা",
+            "utilitiesAmenitiesDescription": "মিটার, পার্কিং ও ভবনের সুবিধাসংক্রান্ত ঐচ্ছিক তথ্য।",
+            "financialDetails": "আর্থিক ও অতিরিক্ত তথ্য",
+            "financialDetailsDescription": "ঐচ্ছিক জামানত, নির্দিষ্ট চার্জ ও নোট।"
+        },
+        "fields": {
+            "buildingName": "ভবনের নাম",
+            "flatNumber": "ফ্ল্যাট নম্বর",
+            "floor": "তলা",
+            "rentalCategory": "ভাড়ার ধরন",
+            "monthlyRent": "মাসিক ভাড়া",
+            "serviceCharge": "সার্ভিস চার্জ",
+            "status": "ফ্ল্যাটের অবস্থা",
+            "gasType": "গ্যাসের ধরন",
+            "electricityType": "বিদ্যুতের ধরন",
+            "sizeSqFt": "আয়তন (বর্গফুট)",
+            "facing": "দিক",
+            "bedrooms": "শয়নকক্ষ",
+            "attachedBathrooms": "সংযুক্ত বাথরুম",
+            "commonBathrooms": "সাধারণ বাথরুম",
+            "balconies": "বারান্দা",
+            "drawingDining": "ড্রয়িং ও ডাইনিং",
+            "servantRoom": "কাজের লোকের কক্ষ",
+            "gasMeterOrAccountNo": "গ্যাস মিটার / অ্যাকাউন্ট নম্বর",
+            "electricityMeterNo": "বিদ্যুৎ মিটার নম্বর",
+            "parkingAvailable": "পার্কিং সুবিধা আছে",
+            "parkingSlotNo": "পার্কিং স্লট নম্বর",
+            "liftAvailable": "লিফট আছে",
+            "generatorAvailable": "জেনারেটর আছে",
+            "securityDeposit": "জামানত",
+            "waterBillFixed": "নির্ধারিত পানির বিল",
+            "garbageBillFixed": "নির্ধারিত ময়লা ব্যবস্থাপনা বিল",
+            "notes": "নোট"
+        },
+        "placeholders": {
+            "buildingName": "যেমন: স্বপ্নীল টাওয়ার",
+            "flatNumber": "যেমন: A-4",
+            "floor": "যেমন: ৪র্থ তলা",
+            "rentalCategory": "ভাড়ার ধরন নির্বাচন করুন",
+            "status": "অবস্থা নির্বাচন করুন",
+            "gasType": "গ্যাসের ধরন নির্বাচন করুন",
+            "electricityType": "বিদ্যুতের ধরন নির্বাচন করুন",
+            "sizeSqFt": "যেমন: ১৩৫০",
+            "facing": "দিক নির্বাচন করুন",
+            "gasMeterOrAccountNo": "মিটার বা অ্যাকাউন্ট নম্বর লিখুন",
+            "electricityMeterNo": "মিটার নম্বর লিখুন",
+            "parkingSlotNo": "যেমন: P-12",
+            "notes": "অন্য কোনো প্রয়োজনীয় তথ্য লিখুন"
+        },
+        "options": {
+            "family": "পরিবার",
+            "bachelor": "ব্যাচেলর",
+            "office": "অফিস",
+            "sublet": "সাবলেট",
+            "occupied": "ভাড়াটিয়া আছে",
+            "vacant": "খালি",
+            "underMaintenance": "রক্ষণাবেক্ষণ চলছে",
+            "titasLine": "তিতাস লাইন",
+            "prepaidMeter": "প্রিপেইড মিটার",
+            "cylinder": "সিলিন্ডার",
+            "prepaid": "প্রিপেইড",
+            "postpaid": "পোস্টপেইড",
+            "subMeter": "সাব-মিটার",
+            "south": "দক্ষিণ",
+            "north": "উত্তর",
+            "east": "পূর্ব",
+            "west": "পশ্চিম",
+            "southEast": "দক্ষিণ-পূর্ব",
+            "southWest": "দক্ষিণ-পশ্চিম"
+        },
+        "notifications": {
+            "success": "ফ্ল্যাট সফলভাবে হালনাগাদ হয়েছে",
+            "failure": "ফ্ল্যাট হালনাগাদ করা যায়নি",
+            "error": "সমস্যা হয়েছে",
+            "networkError": "নেটওয়ার্ক সমস্যা"
+        },
+        "images": {
+            "title": "ছবি",
+            "description": "ফ্ল্যাট ও ভবন সহজে শনাক্ত করতে চাইলে ছবি যোগ করুন।",
+            "flatImage": "ফ্ল্যাটের ছবি",
+            "buildingImage": "ভবনের ছবি",
+            "optional": "ঐচ্ছিক",
+            "flatImageHint": "ফ্ল্যাটের ছবি নির্বাচন করুন।",
+            "buildingImageHint": "ভবনের ছবি নির্বাচন করুন।",
+            "uploadingImage": "ছবি আপলোড হচ্ছে...",
+            "imageUploaded": "ছবি সফলভাবে আপলোড হয়েছে।"
         }
     }
 }

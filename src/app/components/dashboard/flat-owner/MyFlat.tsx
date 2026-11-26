@@ -14,10 +14,13 @@ import {
   Plus,
   Eye,
   UserPlus,
+  SquarePen,
+  Pencil,
 } from "lucide-react";
 import type { IFlat } from "@/types/flatTypes";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import EditFlat from "./EditFlat";
 
 
 
@@ -242,6 +245,7 @@ const MyFlat = ({ flats }: { flats: IFlat[] }) => {
                             {t("actions.assign")}
                           </button>
                         )}
+                        <EditFlat flat={flat} />
                         <Link href={`/dashboard/flat-owner/my-flats/${flat._id}`}>
                           <button className="cursor-pointer inline-flex items-center gap-1 rounded-md border border-slate-200 bg-white px-2.5 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50 dark:border-border dark:bg-background dark:text-foreground dark:hover:bg-accent">
                             <Eye className="h-3.5 w-3.5" />
@@ -345,6 +349,8 @@ const MyFlat = ({ flats }: { flats: IFlat[] }) => {
                     {t("actions.assignTenant")}
                   </button>
                 )}
+
+                <EditFlat flat={flat} />
                 <Link href={`/dashboard/flat-owner/my-flats/${flat._id}`}>
                   <button className="cursor-pointer flex-1 inline-flex items-center justify-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50 dark:border-border dark:bg-background dark:text-foreground dark:hover:bg-accent">
                     <Eye className="h-3.5 w-3.5" />
