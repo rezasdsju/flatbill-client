@@ -1,3 +1,4 @@
+"use server"
 import { baseUrl } from "@/constants/baseURL"
 import { IAddFlat } from "@/types/flatTypes"
 import { protectedMutation } from "../core/server"
