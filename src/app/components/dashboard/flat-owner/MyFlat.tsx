@@ -15,107 +15,23 @@ import {
   Eye,
   UserPlus,
 } from "lucide-react";
+import type { IFlat } from "@/types/flatTypes";
 
-type FlatStatus = "Occupied" | "Vacant";
-type BillStatus = "Paid" | "Due" | "Partial" | "N/A";
 
-interface FlatItem {
-  id: string;
-  flatNumber: string;
-  floor: string;
-  buildingName: string;
-  sizeSqFt: number;
-  bedrooms: number;
-  bathrooms: number;
-  monthlyRent: number;
-  serviceCharge: number;
-  status: FlatStatus;
-  tenantName: string | null;
-  tenantPhone: string | null;
-  moveInDate: string | null;
-  currentMonthBillStatus: BillStatus;
-}
 
-const dummyFlats: FlatItem[] = [
-  {
-    id: "flat-1",
-    flatNumber: "A-4",
-    floor: "4th Floor",
-    buildingName: "Swapnil Tower, Dhanmondi",
-    sizeSqFt: 1350,
-    bedrooms: 3,
-    bathrooms: 3,
-    monthlyRent: 28000,
-    serviceCharge: 3500,
-    status: "Occupied",
-    tenantName: "Tanvir Ahmed",
-    tenantPhone: "01711-234567",
-    moveInDate: "01 Jan 2025",
-    currentMonthBillStatus: "Paid",
-  },
-  {
-    id: "flat-2",
-    flatNumber: "B-2",
-    floor: "2nd Floor",
-    buildingName: "Swapnil Tower, Dhanmondi",
-    sizeSqFt: 1150,
-    bedrooms: 2,
-    bathrooms: 2,
-    monthlyRent: 22000,
-    serviceCharge: 3000,
-    status: "Occupied",
-    tenantName: "Mahmudul Hasan",
-    tenantPhone: "01819-876543",
-    moveInDate: "01 Jun 2025",
-    currentMonthBillStatus: "Due",
-  },
-  {
-    id: "flat-3",
-    flatNumber: "C-5",
-    floor: "5th Floor",
-    buildingName: "Green View Heights, Uttara",
-    sizeSqFt: 1500,
-    bedrooms: 3,
-    bathrooms: 3,
-    monthlyRent: 32000,
-    serviceCharge: 4000,
-    status: "Vacant",
-    tenantName: null,
-    tenantPhone: null,
-    moveInDate: null,
-    currentMonthBillStatus: "N/A",
-  },
-  {
-    id: "flat-4",
-    flatNumber: "D-1",
-    floor: "1st Floor",
-    buildingName: "Green View Heights, Uttara",
-    sizeSqFt: 1050,
-    bedrooms: 2,
-    bathrooms: 2,
-    monthlyRent: 19000,
-    serviceCharge: 2500,
-    status: "Occupied",
-    tenantName: "Farhana Yasmin",
-    tenantPhone: "01912-345678",
-    moveInDate: "01 Mar 2026",
-    currentMonthBillStatus: "Partial",
-  },
-];
-
-const MyFlat = () => {
-  const [filter, setFilter] = useState<"ALL" | FlatStatus>("ALL");
+const MyFlat = ({ flats }: { flats: IFlat[] }) => {
+  const [filter, setFilter] = useState<"ALL" | IFlat["status"]>("ALL");
 
   const filteredFlats =
     filter === "ALL"
-      ? dummyFlats
-      : dummyFlats.filter((flat) => flat.status === filter);
+      ? flats
+      : flats.filter((flat) => flat.status === filter);
 
-  const totalFlats = dummyFlats.length;
-  const occupiedCount = dummyFlats.filter((f) => f.status === "Occupied").length;
-  const vacantCount = dummyFlats.filter((f) => f.status === "Vacant").length;
+  const totalFlats = flats.length;
+  const occupiedCount = flats.filter((f) => f.status === "Occupied").length;
+  const vacantCount = flats.filter((f) => f.status === "Vacant").length;
 
-  const getBillBadge = (status: BillStatus) => {
+  const getBillBadge = (status: IFlat["currentMonthBillStatus"]) => {
     switch (status) {
       case "Paid":
         return (
@@ -189,15 +105,14 @@ const MyFlat = () => {
 
         {/* Filter Tabs */}
         <div className="flex items-center gap-2 border-b border-slate-200 pb-3 dark:border-border">
-          {(["ALL", "Occupied", "Vacant"] as const).map((tab) => (
+          {(["ALL", "Occupied", "Vacant", "Under Maintenance"] as const).map((tab) => (
             <button
               key={tab}
               onClick={() => setFilter(tab)}
-              className={`rounded-lg px-3.5 py-1.5 text-sm font-medium transition ${
-                filter === tab
-                  ? "bg-slate-900 text-white dark:bg-primary dark:text-primary-foreground"
-                  : "bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 dark:border-border dark:bg-background dark:text-muted-foreground dark:hover:bg-accent dark:hover:text-accent-foreground"
-              }`}
+              className={`rounded-lg px-3.5 py-1.5 text-sm font-medium transition ${filter === tab
+                ? "bg-slate-900 text-white dark:bg-primary dark:text-primary-foreground"
+                : "bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 dark:border-border dark:bg-background dark:text-muted-foreground dark:hover:bg-accent dark:hover:text-accent-foreground"
+                }`}
             >
               {tab === "ALL" ? "All Flats" : tab}
             </button>
@@ -222,7 +137,7 @@ const MyFlat = () => {
               <tbody className="divide-y divide-slate-200 dark:divide-border">
                 {filteredFlats.map((flat) => (
                   <tr
-                    key={flat.id}
+                    key={flat._id}
                     className="transition hover:bg-slate-50/70 dark:hover:bg-muted/50"
                   >
                     <td className="px-6 py-4">
@@ -251,7 +166,7 @@ const MyFlat = () => {
                         </span>
                         <span className="inline-flex items-center gap-1">
                           <Bath className="h-3.5 w-3.5 text-slate-400 dark:text-muted-foreground" />
-                          {flat.bathrooms}
+                          {flat.totalBathRooms}
                         </span>
                       </div>
                     </td>
@@ -267,25 +182,30 @@ const MyFlat = () => {
 
                     <td className="px-6 py-4">
                       <span
-                        className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium ${
-                          flat.status === "Occupied"
-                            ? "bg-blue-50 text-blue-700 ring-1 ring-inset ring-blue-600/20 dark:bg-blue-950/60 dark:text-blue-300 dark:ring-blue-400/20"
-                            : "bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-600/20 dark:bg-amber-950/60 dark:text-amber-300 dark:ring-amber-400/20"
-                        }`}
+                        className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium ${flat.status === "Occupied"
+                          ? "bg-blue-50 text-blue-700 ring-1 ring-inset ring-blue-600/20 dark:bg-blue-950/60 dark:text-blue-300 dark:ring-blue-400/20"
+                          : "bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-600/20 dark:bg-amber-950/60 dark:text-amber-300 dark:ring-amber-400/20"
+                          }`}
                       >
                         {flat.status}
                       </span>
                     </td>
 
                     <td className="px-6 py-4">
-                      {flat.tenantName ? (
-                        <div>
-                          <p className="font-medium text-slate-900 dark:text-card-foreground">
-                            {flat.tenantName}
-                          </p>
-                          <p className="text-xs text-slate-500 dark:text-muted-foreground">
-                            {flat.tenantPhone}
-                          </p>
+                      {flat.presentTenants?.length ? (
+                        <div className="space-y-1">
+                          {flat.presentTenants.map((tenant) => (
+                            <div key={tenant._id}>
+                              <p className="font-medium text-slate-900 dark:text-card-foreground">
+                                {tenant.name ?? tenant.email}
+                              </p>
+                              {tenant.phone && (
+                                <p className="text-xs text-slate-500 dark:text-muted-foreground">
+                                  {tenant.phone}
+                                </p>
+                              )}
+                            </div>
+                          ))}
                         </div>
                       ) : (
                         <span className="text-xs italic text-slate-400 dark:text-muted-foreground">
@@ -323,13 +243,13 @@ const MyFlat = () => {
         <div className="grid grid-cols-1 gap-4 md:hidden">
           {filteredFlats.map((flat) => (
             <div
-              key={flat.id}
+              key={flat._id}
               className="rounded-xl border border-slate-200 bg-white p-4 shadow-xs space-y-4 dark:border-border dark:bg-card"
             >
               {/* Card Top */}
               <div className="flex items-start justify-between gap-2">
                 <div className="flex items-center gap-3">
-                  <div                   className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-slate-900 text-sm font-bold text-white dark:bg-primary dark:text-primary-foreground">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-slate-900 text-sm font-bold text-white dark:bg-primary dark:text-primary-foreground">
                     {flat.flatNumber}
                   </div>
                   <div>
@@ -340,11 +260,10 @@ const MyFlat = () => {
                   </div>
                 </div>
                 <span
-                  className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium ${
-                    flat.status === "Occupied"
-                      ? "bg-blue-50 text-blue-700 dark:bg-blue-950/60 dark:text-blue-300"
-                      : "bg-amber-50 text-amber-700 dark:bg-amber-950/60 dark:text-amber-300"
-                  }`}
+                  className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium ${flat.status === "Occupied"
+                    ? "bg-blue-50 text-blue-700 dark:bg-blue-950/60 dark:text-blue-300"
+                    : "bg-amber-50 text-amber-700 dark:bg-amber-950/60 dark:text-amber-300"
+                    }`}
                 >
                   {flat.status}
                 </span>
@@ -367,23 +286,29 @@ const MyFlat = () => {
                     {flat.sizeSqFt} sqft
                   </p>
                   <p className="text-slate-600 dark:text-muted-foreground">
-                    {flat.bedrooms} Bed • {flat.bathrooms} Bath
+                    {flat.bedrooms} Bed • {flat.totalBathRooms} Bath
                   </p>
                 </div>
               </div>
 
               {/* Tenant Info */}
               <div className="flex items-center justify-between border-t border-slate-100 pt-3 dark:border-border">
-                {flat.tenantName ? (
-                  <div className="space-y-0.5">
-                    <p className="flex items-center gap-1.5 text-sm font-medium text-slate-900 dark:text-card-foreground">
-                      <User className="h-3.5 w-3.5 text-slate-400 dark:text-muted-foreground" />
-                      {flat.tenantName}
-                    </p>
-                    <p className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-muted-foreground">
-                      <Phone className="h-3.5 w-3.5 text-slate-400 dark:text-muted-foreground" />
-                      {flat.tenantPhone}
-                    </p>
+                {flat.presentTenants?.length ? (
+                  <div className="space-y-1">
+                    {flat.presentTenants.map((tenant) => (
+                      <div key={tenant._id} className="space-y-0.5">
+                        <p className="flex items-center gap-1.5 text-sm font-medium text-slate-900 dark:text-card-foreground">
+                          <User className="h-3.5 w-3.5 text-slate-400 dark:text-muted-foreground" />
+                          {tenant.name ?? tenant.email}
+                        </p>
+                        {tenant.phone && (
+                          <p className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-muted-foreground">
+                            <Phone className="h-3.5 w-3.5 text-slate-400 dark:text-muted-foreground" />
+                            {tenant.phone}
+                          </p>
+                        )}
+                      </div>
+                    ))}
                   </div>
                 ) : (
                   <p className="text-xs italic text-slate-400 dark:text-muted-foreground">
