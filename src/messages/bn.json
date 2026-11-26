@@ -133,5 +133,52 @@
         "raiseComplaint": "অভিযোগ জানান",
         "emergencyContacts": "জরুরি যোগাযোগ",
         "myProfile": "আমার প্রোফাইল"
+    },
+    "myFlat": {
+        "title": "আমার ফ্ল্যাটসমূহ",
+        "description": "আপনার ফ্ল্যাট, ভাড়াটিয়া বরাদ্দ এবং মাসিক ভাড়ার অবস্থা পরিচালনা করুন।",
+        "loading": "ফ্ল্যাট লোড হচ্ছে...",
+        "addNewFlat": "নতুন ফ্ল্যাট যোগ করুন",
+        "stats": {
+            "totalFlats": "মোট ফ্ল্যাট",
+            "occupied": "ভাড়াটিয়া আছে",
+            "vacant": "খালি"
+        },
+        "filters": {
+            "all": "সব ফ্ল্যাট"
+        },
+        "statuses": {
+            "occupied": "ভাড়াটিয়া আছে",
+            "vacant": "খালি",
+            "underMaintenance": "রক্ষণাবেক্ষণ চলছে"
+        },
+        "billStatuses": {
+            "paid": "পরিশোধিত",
+            "due": "বকেয়া",
+            "partial": "আংশিক পরিশোধিত",
+            "notAvailable": "প্রযোজ্য নয়"
+        },
+        "table": {
+            "flatBuilding": "ফ্ল্যাট ও ভবন",
+            "specifications": "বিবরণ",
+            "rentService": "ভাড়া ও সার্ভিস চার্জ",
+            "status": "অবস্থা",
+            "currentTenant": "বর্তমান ভাড়াটিয়া",
+            "currentMonthBill": "চলতি মাসের বিল",
+            "actions": "কার্যক্রম"
+        },
+        "noTenantAssigned": "কোনো ভাড়াটিয়া বরাদ্দ নেই",
+        "monthlyRent": "মাসিক ভাড়া",
+        "serviceCharge": "সার্ভিস চার্জ",
+        "flatSizeLayout": "ফ্ল্যাটের আয়তন ও বিন্যাস",
+        "squareFeet": "বর্গফুট",
+        "bedrooms": "শয়নকক্ষ",
+        "bathrooms": "বাথরুম",
+        "actions": {
+            "assign": "বরাদ্দ করুন",
+            "details": "বিস্তারিত",
+            "assignTenant": "ভাড়াটিয়া বরাদ্দ করুন",
+            "viewDetails": "বিস্তারিত দেখুন"
+        }
     }
 }

@@ -133,5 +133,52 @@
         "raiseComplaint": "Raise a Complaint",
         "emergencyContacts": "Emergency Contacts",
         "myProfile": "My Profile"
+    },
+    "myFlat": {
+        "title": "My Flats",
+        "description": "Manage your flats, tenant assignments, and monthly rent status.",
+        "loading": "Loading flats...",
+        "addNewFlat": "Add New Flat",
+        "stats": {
+            "totalFlats": "Total Flats",
+            "occupied": "Occupied",
+            "vacant": "Vacant"
+        },
+        "filters": {
+            "all": "All Flats"
+        },
+        "statuses": {
+            "occupied": "Occupied",
+            "vacant": "Vacant",
+            "underMaintenance": "Under Maintenance"
+        },
+        "billStatuses": {
+            "paid": "Paid",
+            "due": "Due",
+            "partial": "Partial",
+            "notAvailable": "N/A"
+        },
+        "table": {
+            "flatBuilding": "Flat & Building",
+            "specifications": "Specifications",
+            "rentService": "Rent & Service",
+            "status": "Status",
+            "currentTenant": "Current Tenant",
+            "currentMonthBill": "Current Month Bill",
+            "actions": "Actions"
+        },
+        "noTenantAssigned": "No tenant assigned",
+        "monthlyRent": "Monthly Rent",
+        "serviceCharge": "service charge",
+        "flatSizeLayout": "Flat Size & Layout",
+        "squareFeet": "sq ft",
+        "bedrooms": "bed",
+        "bathrooms": "bath",
+        "actions": {
+            "assign": "Assign",
+            "details": "Details",
+            "assignTenant": "Assign Tenant",
+            "viewDetails": "View Details"
+        }
     }
 }
