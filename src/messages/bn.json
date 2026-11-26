@@ -310,6 +310,7 @@
         "floor": "তলা",
         "rentalCategory": "ভাড়ার ধরন",
         "facing": "ফ্ল্যাটের দিক",
+        "selectFacing": "দিক নির্বাচন করুন",
         "createdAt": "তৈরির তারিখ",
         "roomDetails": "রুম ও জায়গার বিবরণ",
         "size": "ফ্ল্যাটের আয়তন",

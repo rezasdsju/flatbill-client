@@ -310,6 +310,7 @@
         "floor": "Floor",
         "rentalCategory": "Rental Category",
         "facing": "Facing Direction",
+        "selectFacing": "Select a direction",
         "createdAt": "Created At",
         "roomDetails": "Room & Space Details",
         "size": "Flat Size",
