@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import type { IFlat } from "@/types/flatTypes";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 
 
@@ -241,10 +242,12 @@ const MyFlat = ({ flats }: { flats: IFlat[] }) => {
                             {t("actions.assign")}
                           </button>
                         )}
-                        <button className="inline-flex items-center gap-1 rounded-md border border-slate-200 bg-white px-2.5 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50 dark:border-border dark:bg-background dark:text-foreground dark:hover:bg-accent">
-                          <Eye className="h-3.5 w-3.5" />
-                          {t("actions.details")}
-                        </button>
+                        <Link href={`/dashboard/flat-owner/my-flats/${flat._id}`}>
+                          <button className="cursor-pointer inline-flex items-center gap-1 rounded-md border border-slate-200 bg-white px-2.5 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50 dark:border-border dark:bg-background dark:text-foreground dark:hover:bg-accent">
+                            <Eye className="h-3.5 w-3.5" />
+                            {t("actions.details")}
+                          </button>
+                        </Link>
                       </div>
                     </td>
                   </tr>
@@ -337,15 +340,17 @@ const MyFlat = ({ flats }: { flats: IFlat[] }) => {
               {/* Card Actions */}
               <div className="flex items-center gap-2 pt-1">
                 {flat.status === "Vacant" && (
-                  <button className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-lg bg-emerald-600 px-3 py-2 text-xs font-medium text-white hover:bg-emerald-700 dark:bg-emerald-500 dark:text-slate-950 dark:hover:bg-emerald-400">
+                  <button className="cursor-pointer flex-1 inline-flex items-center justify-center gap-1.5 rounded-lg bg-emerald-600 px-3 py-2 text-xs font-medium text-white hover:bg-emerald-700 dark:bg-emerald-500 dark:text-slate-950 dark:hover:bg-emerald-400">
                     <UserPlus className="h-3.5 w-3.5" />
                     {t("actions.assignTenant")}
                   </button>
                 )}
-                <button className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50 dark:border-border dark:bg-background dark:text-foreground dark:hover:bg-accent">
-                  <Eye className="h-3.5 w-3.5" />
-                  {t("actions.viewDetails")}
-                </button>
+                <Link href={`/dashboard/flat-owner/my-flats/${flat._id}`}>
+                  <button className="cursor-pointer flex-1 inline-flex items-center justify-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50 dark:border-border dark:bg-background dark:text-foreground dark:hover:bg-accent">
+                    <Eye className="h-3.5 w-3.5" />
+                    {t("actions.viewDetails")}
+                  </button>
+                </Link>
               </div>
             </div>
           ))}
