@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { Building2, Plus } from "lucide-react";
+import { Building2, ImagePlus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
     Dialog,
@@ -13,7 +13,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import { Field, FieldGroup } from "@/components/ui/field";
+import { Field, FieldDescription, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import React, { useState } from "react";
@@ -21,6 +21,9 @@ import { IAddFlat } from "@/types/flatTypes";
 import { addNewFlat } from "@/lib/actions/flats";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { useTranslations } from "next-intl";
+import { useImageUpload } from "@/hooks/useImageUpload";
 
 type InputFieldProps = {
     id: string;
@@ -110,7 +113,10 @@ function CheckboxField({ id, label }: { id: string; label: string }) {
 }
 
 const AddNewFlat = () => {
+    const { imagePreview: flatImagePreview, imageUrl: flatImageUrl, isUploadingImage: isUploadingFlatImage, handleImageChange: handleFlatImageChange } = useImageUpload()
+    const { imagePreview: buildingImagePreview, imageUrl: buildingImageUrl, isUploadingImage: isUploadingBuildingImage, handleImageChange: handleBuildingImageChange } = useImageUpload()
 
+    const t = useTranslations("addFlat");
     const [adding, setAdding] = useState(false)
     const router = useRouter()
     const handleAddFlat = async (e: React.SubmitEvent<HTMLFormElement>) => {
@@ -127,6 +133,9 @@ const AddNewFlat = () => {
             status: formData.get("status") as IAddFlat["status"],
             gasType: formData.get("gasType") as IAddFlat["gasType"],
             electricityType: formData.get("electricityType") as IAddFlat["electricityType"],
+
+            flatImage: flatImageUrl,
+            buildingImage: buildingImageUrl,
 
             sizeSqFt: formData.get("sizeSqFt")
                 ? Number(formData.get("sizeSqFt"))
@@ -172,15 +181,15 @@ const AddNewFlat = () => {
         try {
             const result = await addNewFlat(flatData)
             if (result.insertedId) {
-                toast.success("Flat added successfully")
+                toast.success(t("notifications.success"))
                 router.replace('/dashboard/flat-owner/my-flats')
 
             } else {
-                toast.error("Failed to add flat")
+                toast.error(t("notifications.failure"))
             }
         } catch (err) {
-            toast.error("Something went wrong", {
-                description: err instanceof Error ? err.message : "Network error",
+            toast.error(t("notifications.error"), {
+                description: err instanceof Error ? err.message : t("notifications.networkError"),
             })
         } finally {
             setAdding(false)
@@ -192,7 +201,7 @@ const AddNewFlat = () => {
                 render={
                     <Button type="button">
                         <Plus className="size-4" />
-                        Add New Flat
+                        {t("actions.open")}
                     </Button>
                 }
             />
@@ -200,12 +209,12 @@ const AddNewFlat = () => {
                 <DialogHeader>
                     <DialogTitle className="flex items-center gap-2 text-lg sm:text-xl">
                         <Building2 className="size-5 text-primary" />
-                        Add a Flat
+                        {t("dialog.title")}
                     </DialogTitle>
                     <DialogDescription>
-                        Add the flat details below. Fields marked with{" "}
-                        <span className="font-semibold text-destructive">*</span> are
-                        required.
+                        {t("dialog.description")}{" "}
+                        <span className="font-semibold text-destructive">*</span>
+                        {t("dialog.required")}
                     </DialogDescription>
                 </DialogHeader>
 
@@ -217,43 +226,43 @@ const AddNewFlat = () => {
                                     id="required-flat-details"
                                     className="text-sm font-semibold text-foreground"
                                 >
-                                    Required Details
+                                    {t("sections.requiredDetails")}
                                 </h3>
                                 <p className="mt-1 text-xs text-muted-foreground">
-                                    Basic information and utility types for this flat.
+                                    {t("sections.requiredDetailsDescription")}
                                 </p>
                             </div>
                             <FieldGroup className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                                 <InputField
                                     id="buildingName"
-                                    label="Building Name"
-                                    placeholder="e.g. Swapnil Tower"
+                                    label={t("fields.buildingName")}
+                                    placeholder={t("placeholders.buildingName")}
                                     required
                                 />
                                 <InputField
                                     id="flatNumber"
-                                    label="Flat Number"
-                                    placeholder="e.g. A-4"
+                                    label={t("fields.flatNumber")}
+                                    placeholder={t("placeholders.flatNumber")}
                                     required
                                 />
                                 <InputField
                                     id="floor"
-                                    label="Floor"
-                                    placeholder="e.g. 4th Floor"
+                                    label={t("fields.floor")}
+                                    placeholder={t("placeholders.floor")}
                                     required
                                 />
-                                <SelectField id="rentalCategory" label="Rental Category" required>
+                                <SelectField id="rentalCategory" label={t("fields.rentalCategory")} required>
                                     <option value="" disabled>
-                                        Select a category
+                                        {t("placeholders.rentalCategory")}
                                     </option>
-                                    <option value="Family">Family</option>
-                                    <option value="Bachelor">Bachelor</option>
-                                    <option value="Office">Office</option>
-                                    <option value="Sublet">Sublet</option>
+                                    <option value="Family">{t("options.family")}</option>
+                                    <option value="Bachelor">{t("options.bachelor")}</option>
+                                    <option value="Office">{t("options.office")}</option>
+                                    <option value="Sublet">{t("options.sublet")}</option>
                                 </SelectField>
                                 <InputField
                                     id="monthlyRent"
-                                    label="Monthly Rent"
+                                    label={t("fields.monthlyRent")}
                                     type="number"
                                     min={0}
                                     step={0.01}
@@ -262,41 +271,151 @@ const AddNewFlat = () => {
                                 />
                                 <InputField
                                     id="serviceCharge"
-                                    label="Service Charge"
+                                    label={t("fields.serviceCharge")}
                                     type="number"
                                     min={0}
                                     step={0.01}
                                     placeholder="0.00"
                                     required
                                 />
-                                <SelectField id="status" label="Flat Status" required>
+                                <SelectField id="status" label={t("fields.status")} required>
                                     <option value="" disabled>
-                                        Select a status
+                                        {t("placeholders.status")}
                                     </option>
-                                    <option value="Occupied">Occupied</option>
-                                    <option value="Vacant">Vacant</option>
-                                    <option value="Under Maintenance">Under Maintenance</option>
+                                    <option value="Occupied">{t("options.occupied")}</option>
+                                    <option value="Vacant">{t("options.vacant")}</option>
+                                    <option value="Under Maintenance">{t("options.underMaintenance")}</option>
                                 </SelectField>
-                                <SelectField id="gasType" label="Gas Type" required>
+                                <SelectField id="gasType" label={t("fields.gasType")} required>
                                     <option value="" disabled>
-                                        Select a gas type
+                                        {t("placeholders.gasType")}
                                     </option>
-                                    <option value="Titas Line">Titas Line</option>
-                                    <option value="Prepaid Meter">Prepaid Meter</option>
-                                    <option value="Cylinder">Cylinder</option>
+                                    <option value="Titas Line">{t("options.titasLine")}</option>
+                                    <option value="Prepaid Meter">{t("options.prepaidMeter")}</option>
+                                    <option value="Cylinder">{t("options.cylinder")}</option>
                                 </SelectField>
                                 <SelectField
                                     id="electricityType"
-                                    label="Electricity Type"
+                                    label={t("fields.electricityType")}
                                     required
                                 >
                                     <option value="" disabled>
-                                        Select an electricity type
+                                        {t("placeholders.electricityType")}
                                     </option>
-                                    <option value="Prepaid">Prepaid</option>
-                                    <option value="Postpaid">Postpaid</option>
-                                    <option value="Sub-meter">Sub-meter</option>
+                                    <option value="Prepaid">{t("options.prepaid")}</option>
+                                    <option value="Postpaid">{t("options.postpaid")}</option>
+                                    <option value="Sub-meter">{t("options.subMeter")}</option>
                                 </SelectField>
+                            </FieldGroup>
+                        </section>
+
+
+                        <section
+                            aria-labelledby="optional-images-title"
+                            className="space-y-4"
+                        >
+                            <div>
+                                <h3
+                                    id="optional-images-title"
+                                    className="text-sm font-semibold text-foreground"
+                                >
+                                    {t("images.title")}
+                                </h3>
+                                <p className="mt-1 text-xs text-muted-foreground">
+                                    {t("images.description")}
+                                </p>
+                            </div>
+                            <FieldGroup className="grid gap-4 sm:grid-cols-2">
+                                <div className="rounded-xl border border-border bg-muted/30 p-4">
+                                    <div className="grid gap-4 sm:grid-cols-[5rem_minmax(0,1fr)] sm:items-center">
+                                        <div className="flex items-center justify-center">
+                                            {flatImagePreview ? (
+                                                <Image
+                                                    src={flatImagePreview}
+                                                    alt={t("images.flatImage")}
+                                                    width={80}
+                                                    height={80}
+                                                    unoptimized
+                                                    className="size-20 rounded-xl object-cover ring-1 ring-border"
+                                                />
+                                            ) : (
+                                                <div className="flex size-20 items-center justify-center rounded-xl bg-background text-muted-foreground ring-1 ring-border">
+                                                    <ImagePlus className="size-6" aria-hidden="true" />
+                                                </div>
+                                            )}
+                                        </div>
+                                        <Field className="min-w-0 gap-2">
+                                            <div className="flex items-center justify-between gap-2">
+                                                <FieldLabel htmlFor="flatImage">
+                                                    {t("images.flatImage")}
+                                                </FieldLabel>
+                                                <span className="shrink-0 text-xs text-muted-foreground">
+                                                    {t("images.optional")}
+                                                </span>
+                                            </div>
+                                            <Input
+                                                id="flatImage"
+                                                name="flatImage"
+                                                type="file"
+                                                accept="image/*"
+                                                onChange={handleFlatImageChange}
+                                                className="bg-background text-xs file:mr-3 file:rounded-md file:border-0 file:bg-primary/10 file:px-3 file:py-1 file:font-medium file:text-primary hover:file:bg-primary/15"
+                                            />
+                                            <FieldDescription>
+                                                {isUploadingFlatImage
+                                                    ? t("images.uploadingImage")
+                                                    : flatImageUrl
+                                                        ? t("images.imageUploaded")
+                                                        : t("images.flatImageHint")}
+                                            </FieldDescription>
+                                        </Field>
+                                    </div>
+                                </div>
+                                <div className="rounded-xl border border-border bg-muted/30 p-4">
+                                    <div className="grid gap-4 sm:grid-cols-[5rem_minmax(0,1fr)] sm:items-center">
+                                        <div className="flex items-center justify-center">
+                                            {buildingImagePreview ? (
+                                                <Image
+                                                    src={buildingImagePreview}
+                                                    alt={t("images.buildingImage")}
+                                                    width={80}
+                                                    height={80}
+                                                    unoptimized
+                                                    className="size-20 rounded-xl object-cover ring-1 ring-border"
+                                                />
+                                            ) : (
+                                                <div className="flex size-20 items-center justify-center rounded-xl bg-background text-muted-foreground ring-1 ring-border">
+                                                    <ImagePlus className="size-6" aria-hidden="true" />
+                                                </div>
+                                            )}
+                                        </div>
+                                        <Field className="min-w-0 gap-2">
+                                            <div className="flex items-center justify-between gap-2">
+                                                <FieldLabel htmlFor="buildingImage">
+                                                    {t("images.buildingImage")}
+                                                </FieldLabel>
+                                                <span className="shrink-0 text-xs text-muted-foreground">
+                                                    {t("images.optional")}
+                                                </span>
+                                            </div>
+                                            <Input
+                                                id="buildingImage"
+                                                name="buildingImage"
+                                                type="file"
+                                                accept="image/*"
+                                                onChange={handleBuildingImageChange}
+                                                className="bg-background text-xs file:mr-3 file:rounded-md file:border-0 file:bg-primary/10 file:px-3 file:py-1 file:font-medium file:text-primary hover:file:bg-primary/15"
+                                            />
+                                            <FieldDescription>
+                                                {isUploadingBuildingImage
+                                                    ? t("images.uploadingImage")
+                                                    : buildingImageUrl
+                                                        ? t("images.imageUploaded")
+                                                        : t("images.buildingImageHint")}
+                                            </FieldDescription>
+                                        </Field>
+                                    </div>
+                                </div>
                             </FieldGroup>
                         </section>
 
@@ -306,33 +425,33 @@ const AddNewFlat = () => {
                                     id="optional-room-details"
                                     className="text-sm font-semibold text-foreground"
                                 >
-                                    Room &amp; Space Details
+                                    {t("sections.roomSpaceDetails")}
                                 </h3>
                                 <p className="mt-1 text-xs text-muted-foreground">
-                                    Optional details to describe the flat layout.
+                                    {t("sections.roomSpaceDetailsDescription")}
                                 </p>
                             </div>
                             <FieldGroup className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                                 <InputField
                                     id="sizeSqFt"
-                                    label="Size (sq ft)"
+                                    label={t("fields.sizeSqFt")}
                                     type="number"
                                     min={0}
                                     step={1}
-                                    placeholder="e.g. 1350"
+                                    placeholder={t("placeholders.sizeSqFt")}
                                 />
-                                <SelectField id="facing" label="Facing Direction">
-                                    <option value="">Select a direction</option>
-                                    <option value="South">South</option>
-                                    <option value="North">North</option>
-                                    <option value="East">East</option>
-                                    <option value="West">West</option>
-                                    <option value="South-East">South-East</option>
-                                    <option value="South-West">South-West</option>
+                                <SelectField id="facing" label={t("fields.facing")}>
+                                    <option value="">{t("placeholders.facing")}</option>
+                                    <option value="South">{t("options.south")}</option>
+                                    <option value="North">{t("options.north")}</option>
+                                    <option value="East">{t("options.east")}</option>
+                                    <option value="West">{t("options.west")}</option>
+                                    <option value="South-East">{t("options.southEast")}</option>
+                                    <option value="South-West">{t("options.southWest")}</option>
                                 </SelectField>
                                 <InputField
                                     id="bedrooms"
-                                    label="Bedrooms"
+                                    label={t("fields.bedrooms")}
                                     type="number"
                                     min={0}
                                     step={1}
@@ -340,7 +459,7 @@ const AddNewFlat = () => {
                                 />
                                 <InputField
                                     id="attachedBathrooms"
-                                    label="Attached Bathrooms"
+                                    label={t("fields.attachedBathrooms")}
                                     type="number"
                                     min={0}
                                     step={1}
@@ -348,7 +467,7 @@ const AddNewFlat = () => {
                                 />
                                 <InputField
                                     id="commonBathrooms"
-                                    label="Common Bathrooms"
+                                    label={t("fields.commonBathrooms")}
                                     type="number"
                                     min={0}
                                     step={1}
@@ -356,14 +475,14 @@ const AddNewFlat = () => {
                                 />
                                 <InputField
                                     id="balconies"
-                                    label="Balconies"
+                                    label={t("fields.balconies")}
                                     type="number"
                                     min={0}
                                     step={1}
                                     placeholder="0"
                                 />
-                                <CheckboxField id="hasDrawingDining" label="Drawing & Dining" />
-                                <CheckboxField id="hasServantRoom" label="Servant Room" />
+                                <CheckboxField id="hasDrawingDining" label={t("fields.drawingDining")} />
+                                <CheckboxField id="hasServantRoom" label={t("fields.servantRoom")} />
                             </FieldGroup>
                         </section>
 
@@ -376,31 +495,31 @@ const AddNewFlat = () => {
                                     id="optional-utility-details"
                                     className="text-sm font-semibold text-foreground"
                                 >
-                                    Utilities &amp; Amenities
+                                    {t("sections.utilitiesAmenities")}
                                 </h3>
                                 <p className="mt-1 text-xs text-muted-foreground">
-                                    Optional meter, parking, and building facility details.
+                                    {t("sections.utilitiesAmenitiesDescription")}
                                 </p>
                             </div>
                             <FieldGroup className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                                 <InputField
                                     id="gasMeterOrAccountNo"
-                                    label="Gas Meter / Account Number"
-                                    placeholder="Enter meter or account number"
+                                    label={t("fields.gasMeterOrAccountNo")}
+                                    placeholder={t("placeholders.gasMeterOrAccountNo")}
                                 />
                                 <InputField
                                     id="electricityMeterNo"
-                                    label="Electricity Meter Number"
-                                    placeholder="Enter meter number"
+                                    label={t("fields.electricityMeterNo")}
+                                    placeholder={t("placeholders.electricityMeterNo")}
                                 />
-                                <CheckboxField id="hasParking" label="Parking Available" />
+                                <CheckboxField id="hasParking" label={t("fields.parkingAvailable")} />
                                 <InputField
                                     id="parkingSlotNo"
-                                    label="Parking Slot Number"
-                                    placeholder="e.g. P-12"
+                                    label={t("fields.parkingSlotNo")}
+                                    placeholder={t("placeholders.parkingSlotNo")}
                                 />
-                                <CheckboxField id="hasLift" label="Lift Available" />
-                                <CheckboxField id="hasGenerator" label="Generator Available" />
+                                <CheckboxField id="hasLift" label={t("fields.liftAvailable")} />
+                                <CheckboxField id="hasGenerator" label={t("fields.generatorAvailable")} />
                             </FieldGroup>
                         </section>
 
@@ -413,16 +532,16 @@ const AddNewFlat = () => {
                                     id="optional-financial-details"
                                     className="text-sm font-semibold text-foreground"
                                 >
-                                    Financial &amp; Additional Details
+                                    {t("sections.financialDetails")}
                                 </h3>
                                 <p className="mt-1 text-xs text-muted-foreground">
-                                    Optional deposits, fixed charges, and notes.
+                                    {t("sections.financialDetailsDescription")}
                                 </p>
                             </div>
                             <FieldGroup className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                                 <InputField
                                     id="securityDeposit"
-                                    label="Security Deposit"
+                                    label={t("fields.securityDeposit")}
                                     type="number"
                                     min={0}
                                     step={0.01}
@@ -430,7 +549,7 @@ const AddNewFlat = () => {
                                 />
                                 <InputField
                                     id="waterBillFixed"
-                                    label="Fixed Water Bill"
+                                    label={t("fields.waterBillFixed")}
                                     type="number"
                                     min={0}
                                     step={0.01}
@@ -438,19 +557,19 @@ const AddNewFlat = () => {
                                 />
                                 <InputField
                                     id="garbageBillFixed"
-                                    label="Fixed Garbage Bill"
+                                    label={t("fields.garbageBillFixed")}
                                     type="number"
                                     min={0}
                                     step={0.01}
                                     placeholder="0.00"
                                 />
                                 <Field className="sm:col-span-2 lg:col-span-3">
-                                    <Label htmlFor="notes">Notes</Label>
+                                    <Label htmlFor="notes">{t("fields.notes")}</Label>
                                     <textarea
                                         id="notes"
                                         name="notes"
                                         rows={3}
-                                        placeholder="Add any other useful details"
+                                        placeholder={t("placeholders.notes")}
                                         className="w-full min-w-0 resize-y rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
                                     />
                                 </Field>
@@ -460,11 +579,11 @@ const AddNewFlat = () => {
 
 
                     <DialogFooter>
-                        <DialogClose render={<Button type="button" variant="outline">Cancel</Button>} />
+                        <DialogClose render={<Button type="button" variant="outline">{t("actions.cancel")}</Button>} />
                         <Button
-                            disabled={adding}
+                            disabled={adding || isUploadingBuildingImage || isUploadingFlatImage}
                             type="submit">
-                            {adding ? 'Adding' : 'Add Flat'}
+                            {adding ? t("actions.adding") : t("actions.addFlat")}
                         </Button>
                     </DialogFooter>
                 </form>

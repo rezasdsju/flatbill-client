@@ -181,5 +181,115 @@
             "assignTenant": "Assign Tenant",
             "viewDetails": "View Details"
         }
+    },
+    "addFlat": {
+        "page": {
+            "owner": "Flat Owner",
+            "title": "Add a New Flat",
+            "description": "Keep your property details organized. Start with the flat's basic information, then add any optional room, utility, or billing details."
+        },
+        "actions": {
+            "open": "Add New Flat",
+            "cancel": "Cancel",
+            "adding": "Adding...",
+            "addFlat": "Add Flat"
+        },
+        "dialog": {
+            "title": "Add a Flat",
+            "description": "Add the flat details below. Fields marked with",
+            "required": " are required."
+        },
+        "sections": {
+            "requiredDetails": "Required Details",
+            "requiredDetailsDescription": "Basic information and utility types for this flat.",
+            "roomSpaceDetails": "Room & Space Details",
+            "roomSpaceDetailsDescription": "Optional details to describe the flat layout.",
+            "utilitiesAmenities": "Utilities & Amenities",
+            "utilitiesAmenitiesDescription": "Optional meter, parking, and building facility details.",
+            "financialDetails": "Financial & Additional Details",
+            "financialDetailsDescription": "Optional deposits, fixed charges, and notes."
+        },
+        "fields": {
+            "buildingName": "Building Name",
+            "flatNumber": "Flat Number",
+            "floor": "Floor",
+            "rentalCategory": "Rental Category",
+            "monthlyRent": "Monthly Rent",
+            "serviceCharge": "Service Charge",
+            "status": "Flat Status",
+            "gasType": "Gas Type",
+            "electricityType": "Electricity Type",
+            "sizeSqFt": "Size (sq ft)",
+            "facing": "Facing Direction",
+            "bedrooms": "Bedrooms",
+            "attachedBathrooms": "Attached Bathrooms",
+            "commonBathrooms": "Common Bathrooms",
+            "balconies": "Balconies",
+            "drawingDining": "Drawing & Dining",
+            "servantRoom": "Servant Room",
+            "gasMeterOrAccountNo": "Gas Meter / Account Number",
+            "electricityMeterNo": "Electricity Meter Number",
+            "parkingAvailable": "Parking Available",
+            "parkingSlotNo": "Parking Slot Number",
+            "liftAvailable": "Lift Available",
+            "generatorAvailable": "Generator Available",
+            "securityDeposit": "Security Deposit",
+            "waterBillFixed": "Fixed Water Bill",
+            "garbageBillFixed": "Fixed Garbage Bill",
+            "notes": "Notes"
+        },
+        "placeholders": {
+            "buildingName": "e.g. Swapnil Tower",
+            "flatNumber": "e.g. A-4",
+            "floor": "e.g. 4th Floor",
+            "rentalCategory": "Select a category",
+            "status": "Select a status",
+            "gasType": "Select a gas type",
+            "electricityType": "Select an electricity type",
+            "sizeSqFt": "e.g. 1350",
+            "facing": "Select a direction",
+            "gasMeterOrAccountNo": "Enter meter or account number",
+            "electricityMeterNo": "Enter meter number",
+            "parkingSlotNo": "e.g. P-12",
+            "notes": "Add any other useful details"
+        },
+        "options": {
+            "family": "Family",
+            "bachelor": "Bachelor",
+            "office": "Office",
+            "sublet": "Sublet",
+            "occupied": "Occupied",
+            "vacant": "Vacant",
+            "underMaintenance": "Under Maintenance",
+            "titasLine": "Titas Line",
+            "prepaidMeter": "Prepaid Meter",
+            "cylinder": "Cylinder",
+            "prepaid": "Prepaid",
+            "postpaid": "Postpaid",
+            "subMeter": "Sub-meter",
+            "south": "South",
+            "north": "North",
+            "east": "East",
+            "west": "West",
+            "southEast": "South-East",
+            "southWest": "South-West"
+        },
+        "notifications": {
+            "success": "Flat added successfully",
+            "failure": "Failed to add flat",
+            "error": "Something went wrong",
+            "networkError": "Network error"
+        },
+        "images": {
+            "title": "Images",
+            "description": "Optional photos help identify the flat and its building.",
+            "flatImage": "Flat image",
+            "buildingImage": "Building image",
+            "optional": "Optional",
+            "flatImageHint": "Choose a photo of the flat.",
+            "buildingImageHint": "Choose a photo of the building.",
+            "uploadingImage": "Uploading image...",
+            "imageUploaded": "Image uploaded successfully."
+        }
     }
 }
