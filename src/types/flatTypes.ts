@@ -41,7 +41,8 @@ export interface IFlat {
     balconies: number;
     hasDrawingDining: boolean;
     hasServantRoom?: boolean;
-
+    flatImage?: string;
+    buildingImage?: string;
     // Dhaka Specific Utilities & Amenities
     gasType: GasType;
     gasMeterOrAccountNo?: string;
@@ -111,4 +112,7 @@ export interface IAddFlat {
     waterBillFixed?: number;
     garbageBillFixed?: number;
     notes?: string;
+    flatImage?: string;
+    buildingImage?: string;
+
 }
