@@ -1,6 +1,6 @@
 import MyFlat from "@/app/components/dashboard/flat-owner/MyFlat";
 
-const MyFlatPage = () => {
+const MyFlatPage = async() => {
     return (
         <div>
             <MyFlat/>
