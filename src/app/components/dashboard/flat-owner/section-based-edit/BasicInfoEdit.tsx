@@ -13,10 +13,13 @@ import {
 import { Field, FieldGroup } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { IFlat } from "@/types/flatTypes"
+import { updateFlat } from "@/lib/actions/flats"
+import { IAddFlat, IFlat } from "@/types/flatTypes"
 import { Pencil } from "lucide-react"
 import { useTranslations } from "next-intl"
-import React, { ReactNode, SetStateAction } from "react"
+import { useRouter } from "next/navigation"
+import React, { ReactNode, SetStateAction, useState } from "react"
+import { toast } from "sonner"
 
 
 
@@ -64,6 +67,69 @@ interface IBasicInfoEdit {
 
 const BasicInfoEdit = ({ edit, setEdit, flat }: IBasicInfoEdit) => {
     const t = useTranslations('flatDetail')
+    const tEdit = useTranslations("editFlat");
+    const [adding, setAdding] = useState(false)
+    const router = useRouter()
+    const handleUpdateBasicInfo = async (e: React.SubmitEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        const formData = new FormData(e.currentTarget)
+        setAdding(true)
+        const BasicInfoForFlatData: IAddFlat = {
+            buildingName: formData.get("buildingName") as string,
+            flatNumber: formData.get("flatNumber") as string,
+            floor: formData.get("floor") as string,
+            rentalCategory: formData.get("rentalCategory") as IAddFlat["rentalCategory"],
+            facing: (formData.get("facing") as IAddFlat["facing"]) || undefined,
+
+            monthlyRent: flat.monthlyRent,
+            serviceCharge: flat.serviceCharge,
+            status: flat.status,
+            gasType: flat.gasType,
+            electricityType: flat.electricityType,
+            flatImage: flat.flatImage,
+            buildingImage: flat.buildingImage,
+
+            sizeSqFt: flat.sizeSqFt,
+            bedrooms: flat.bedrooms,
+            attachedBathrooms: flat.attachedBathrooms,
+            commonBathrooms: flat.commonBathrooms,
+            balconies: flat.balconies,
+            hasDrawingDining: flat.hasDrawingDining,
+            hasServantRoom: flat.hasServantRoom,
+
+            gasMeterOrAccountNo: flat.gasMeterOrAccountNo,
+            electricityMeterNo: flat.electricityMeterNo,
+            hasParking: flat.hasParking,
+            parkingSlotNo: flat.parkingSlotNo,
+            hasLift: flat.hasLift,
+            hasGenerator: flat.hasGenerator,
+
+            securityDeposit: flat.securityDeposit,
+            waterBillFixed: flat.waterBillFixed,
+            garbageBillFixed: flat.garbageBillFixed,
+            notes: flat.notes,
+        };
+
+        try {
+            const result = await updateFlat(flat._id, BasicInfoForFlatData);
+
+            if (result.success) {
+                toast.success(tEdit("notifications.success"));
+                router.refresh();
+            } else {
+                toast.error(tEdit("notifications.failure"));
+            }
+        } catch (err) {
+            toast.error(tEdit("notifications.error"), {
+                description:
+                    err instanceof Error
+                        ? err.message
+                        : tEdit("notifications.networkError"),
+            });
+        } finally {
+            setAdding(false);
+        }
+    }
     return (
         <Dialog>
             <DialogTrigger
@@ -77,7 +143,7 @@ const BasicInfoEdit = ({ edit, setEdit, flat }: IBasicInfoEdit) => {
                 }
             />
             <DialogContent className="max-h-[90vh] w-[calc(100vw-2rem)] max-w-lg overflow-y-auto rounded-xl sm:w-full">
-                <form className="space-y-4">
+                <form onSubmit={handleUpdateBasicInfo} className="space-y-4">
                     <DialogHeader>
                         <DialogTitle>{t("basicInformation")}</DialogTitle>
                         <DialogDescription />
@@ -117,7 +183,7 @@ const BasicInfoEdit = ({ edit, setEdit, flat }: IBasicInfoEdit) => {
                     </FieldGroup>
                     <DialogFooter className="flex-col-reverse gap-2 sm:flex-row sm:justify-end">
                         <DialogClose render={<Button type="button" variant="outline" className="w-full sm:w-auto">Cancel</Button>} />
-                        <Button type="submit" className="w-full sm:w-auto">Save changes</Button>
+                        <Button disabled={adding} type="submit" className="w-full sm:w-auto">{adding ? 'Updating...' : 'Update'}</Button>
                     </DialogFooter>
                 </form>
             </DialogContent>
