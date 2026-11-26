@@ -36,6 +36,14 @@ export const getToken = async () => {
     return token
 }
 
+export const requireRole = async () => {
+    const session = await getSessionForServerSide()
+    if (!session || !session?.user?.role) {
+        redirect('/unauthorized')
+    }
+    return session
+}
+
 export const authFetch = async (api: string) => {
     const token = await getToken()
     const res = await fetch(api, {
