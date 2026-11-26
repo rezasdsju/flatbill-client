@@ -1,3 +1,4 @@
+import "server-only"
 import { baseUrl } from "@/constants/baseURL";
 import { auth } from "@/lib/auth"
 
@@ -5,7 +6,6 @@ import { headers } from "next/headers"
 import { redirect } from "next/navigation";
 const BASE_URL = baseUrl()
 export const getSessionForServerSide = async () => {
-    "use server";
     const session = await auth.api.getSession({
         headers: await headers()
     })
