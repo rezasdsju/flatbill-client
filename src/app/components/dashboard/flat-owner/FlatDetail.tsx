@@ -157,7 +157,7 @@ const FlatDetail = ({ flat }: { flat: IFlat }) => {
                 {/* Images */}
                 <div className="grid gap-4 md:grid-cols-2">
                     <div className="overflow-hidden rounded-xl border border-border bg-card">
-                        <div className="relative aspect-[16/9] bg-muted">
+                        <div className="relative aspect-video bg-muted">
                             {flat.flatImage ? (
                                 <Image
                                     src={flat.flatImage}
@@ -180,7 +180,7 @@ const FlatDetail = ({ flat }: { flat: IFlat }) => {
                     </div>
 
                     <div className="overflow-hidden rounded-xl border border-border bg-card">
-                        <div className="relative aspect-[16/9] bg-muted">
+                        <div className="relative aspect-video bg-muted">
                             {flat.buildingImage ? (
                                 <Image
                                     src={flat.buildingImage}
