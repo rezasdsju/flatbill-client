@@ -13,3 +13,13 @@ export const addNewFlat = async (data: IAddFlat) => {
     }
     return json
 }
+
+export const updateFlat = async (id: string, data: IAddFlat) => {
+    const api = `${BASE_URL}/flat-owner/flats/${id}`
+    const res = await protectedMutation(api, 'PATCH', data)
+    const json = await res.json().catch(() => null)
+    if (!res.ok) {
+        throw new Error(json?.message ?? `Failed (${res.status})`)
+    }
+    return json
+}
