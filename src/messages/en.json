@@ -493,5 +493,24 @@
             "uploadingImage": "Uploading image...",
             "imageUploaded": "Image uploaded successfully."
         }
+    },
+    "assignTenant": {
+        "title": "Assign a Tenant",
+        "searchLabel": "Search (at least 2 characters)",
+        "emailSearchPlaceholder": "e.g. tenant@example.com",
+        "searchByEmail": "Search by email to find a tenant.",
+        "noTenantsFound": "No tenants found. Check the email and try again.",
+        "oneTenantFound": "1 tenant found. Select one below.",
+        "tenantsFound": "{count} tenants found. Select one below.",
+        "selectEmailPlaceholder": "Click here to select a matching email",
+        "searchEmailFirst": "Search for an email first",
+        "selectTenantError": "Please select a tenant to assign.",
+        "assignSuccess": "Tenant assigned successfully.",
+        "assignFailure": "Failed to assign tenant. Please try again.",
+        "name": "Name",
+        "email": "Email",
+        "phone": "Phone number",
+        "cancel": "Cancel",
+        "saveChanges": "Save changes"
     }
 }
