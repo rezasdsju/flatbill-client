@@ -152,6 +152,7 @@ export interface IUpdateFlat {
     hasGenerator?: boolean;
 
     // Optional Financial & Extra Info
+    currentDueAmount?: number;
     securityDeposit?: number;
     waterBillFixed?: number;
     garbageBillFixed?: number;
