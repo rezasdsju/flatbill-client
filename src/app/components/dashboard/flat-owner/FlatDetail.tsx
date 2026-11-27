@@ -445,8 +445,25 @@ const FlatDetail = ({ flat }: { flat: IFlat }) => {
                                     key={tenant._id}
                                     className="rounded-lg border border-border p-4"
                                 >
-                                    <h3 className="font-semibold">{tenant.name || "—"}</h3>
-                                    <div className="mt-3 grid grid-cols-1 gap-3 text-sm sm:grid-cols-2">
+                                    <div className="mb-4 flex items-center gap-3">
+                                        {tenant.image ? (
+                                            <Image
+                                                src={tenant.image}
+                                                alt=""
+                                                width={48}
+                                                height={48}
+                                                className="size-12 shrink-0 rounded-full object-cover"
+                                            />
+                                        ) : (
+                                            <div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-muted text-muted-foreground">
+                                                <UserRound className="size-6" aria-hidden="true" />
+                                            </div>
+                                        )}
+
+                                        <h3 className="font-semibold">{tenant.name || "—"}</h3>
+                                    </div>
+
+                                    <div className="grid grid-cols-1 gap-3 text-sm sm:grid-cols-2">
                                         <InfoItem label={t("email")} value={tenant.email} />
                                         <InfoItem label={t("phone")} value={tenant.phone} />
                                         <InfoItem
