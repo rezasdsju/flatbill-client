@@ -27,6 +27,8 @@ import { useTranslations } from "next-intl";
 import type { IFlat } from "@/types/flatTypes";
 import { useState } from "react";
 import BasicInfoEdit from "./section-based-edit/BasicInfoEdit";
+import FlatImageEdit from "./section-based-edit/FlatImageEdit";
+import BuildingImageEdit from "./section-based-edit/BuildingImageEdit";
 
 const FlatDetail = ({ flat }: { flat: IFlat }) => {
     const t = useTranslations("flatDetail");
@@ -177,7 +179,7 @@ const FlatDetail = ({ flat }: { flat: IFlat }) => {
                 <div className="grid gap-4 md:grid-cols-2">
                     <div className="overflow-hidden rounded-xl border border-border bg-card ">
                         <div className={`relative aspect-video bg-muted `}>
-                            <Pencil className={`absolute right-3 top-3 z-10 size-5 text-white cursor-pointer ${!edit && 'hidden'}`} />
+                            <FlatImageEdit edit={edit} flat={flat} />
 
 
                             {flat.flatImage ? (
@@ -203,7 +205,7 @@ const FlatDetail = ({ flat }: { flat: IFlat }) => {
 
                     <div className="overflow-hidden rounded-xl border border-border bg-card">
                         <div className="relative aspect-video bg-muted">
-                            <Pencil className={`absolute right-3 top-3 z-10 size-5 text-white cursor-pointer ${!edit && 'hidden'}`} />
+                            <BuildingImageEdit edit={edit} flat={flat} />
 
                             {flat.buildingImage ? (
                                 <Image
@@ -275,7 +277,7 @@ const FlatDetail = ({ flat }: { flat: IFlat }) => {
                 <div className="grid gap-5 lg:grid-cols-2">
                     {/* Basic information */}
                     <Section className="relative" title={t("basicInformation")} icon={<Building2 className="size-5" />}>
-                        <BasicInfoEdit edit={edit} setEdit={setEdit} flat={flat}/>
+                        <BasicInfoEdit edit={edit} setEdit={setEdit} flat={flat} />
 
 
                         <div className="grid grid-cols-2 gap-x-4 gap-y-5 sm:grid-cols-3">
