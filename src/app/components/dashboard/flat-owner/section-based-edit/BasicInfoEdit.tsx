@@ -69,6 +69,7 @@ const BasicInfoEdit = ({ edit, setEdit, flat }: IBasicInfoEdit) => {
     const t = useTranslations('flatDetail')
     const tEdit = useTranslations("editFlat");
     const [adding, setAdding] = useState(false)
+    const [open, setOpen] = useState(false)
     const router = useRouter()
     const handleUpdateBasicInfo = async (e: React.SubmitEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -115,6 +116,7 @@ const BasicInfoEdit = ({ edit, setEdit, flat }: IBasicInfoEdit) => {
 
             if (result.success) {
                 toast.success(tEdit("notifications.success"));
+                setOpen(false)
                 router.refresh();
             } else {
                 toast.error(tEdit("notifications.failure"));
@@ -131,7 +133,7 @@ const BasicInfoEdit = ({ edit, setEdit, flat }: IBasicInfoEdit) => {
         }
     }
     return (
-        <Dialog>
+        <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger
                 render={
                     <button
