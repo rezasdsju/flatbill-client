@@ -31,6 +31,7 @@ import FlatImageEdit from "./section-based-edit/FlatImageEdit";
 import BuildingImageEdit from "./section-based-edit/BuildingImageEdit";
 import RoomDetailEdit from "./section-based-edit/RoomDetailEdit";
 import FinancialSummaryEdit from "./section-based-edit/FinalcialSummaryEdit";
+import UtilitiesEdit from "./section-based-edit/UtilitiesEdit";
 
 const FlatDetail = ({ flat }: { flat: IFlat }) => {
     const t = useTranslations("flatDetail");
@@ -337,7 +338,8 @@ const FlatDetail = ({ flat }: { flat: IFlat }) => {
 
                     {/* Utilities */}
                     <Section className="relative" title={t("utilities")} icon={<Zap className="size-5" />}>
-                        <Pencil className={`absolute right-3 top-3 z-10 size-5 text-white cursor-pointer ${!edit && 'hidden'}`} />
+                        {/* <Pencil className={`absolute right-3 top-3 z-10 size-5 text-white cursor-pointer ${!edit && 'hidden'}`} /> */}
+                        <UtilitiesEdit edit={edit} flat={flat} />
 
 
                         <div className="grid grid-cols-2 gap-x-4 gap-y-5">
