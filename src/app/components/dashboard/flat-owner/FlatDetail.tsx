@@ -30,6 +30,7 @@ import BasicInfoEdit from "./section-based-edit/BasicInfoEdit";
 import FlatImageEdit from "./section-based-edit/FlatImageEdit";
 import BuildingImageEdit from "./section-based-edit/BuildingImageEdit";
 import RoomDetailEdit from "./section-based-edit/RoomDetailEdit";
+import FinancialSummaryEdit from "./section-based-edit/FinalcialSummaryEdit";
 
 const FlatDetail = ({ flat }: { flat: IFlat }) => {
     const t = useTranslations("flatDetail");
@@ -237,21 +238,25 @@ const FlatDetail = ({ flat }: { flat: IFlat }) => {
                             label: t("monthlyRent"),
                             value: formatMoney(flat.monthlyRent),
                             icon: <Wallet className="size-5" />,
+                            category: 'monthlyRent'
                         },
                         {
                             label: t("serviceCharge"),
                             value: formatMoney(flat.serviceCharge),
                             icon: <FileText className="size-5" />,
+                            category: 'serviceCharge'
                         },
                         {
                             label: t("currentDue"),
                             value: formatMoney(flat.currentDueAmount),
                             icon: <Clock className="size-5" />,
+                            category: 'currentDueAmount'
                         },
                         {
                             label: t("securityDeposit"),
                             value: formatMoney(flat.securityDeposit),
                             icon: <CalendarDays className="size-5" />,
+                            category: 'securityDeposit'
                         },
                     ].map((item) => (
                         <div
@@ -259,8 +264,8 @@ const FlatDetail = ({ flat }: { flat: IFlat }) => {
                             className="relative rounded-xl border border-border bg-card p-4 shadow-sm"
 
                         >
-                            <Pencil className={`absolute right-3 bottom-3 z-10 size-5 text-white cursor-pointer ${!edit && 'hidden'}`} />
-
+                            {/* <Pencil className={`absolute right-3 bottom-3 z-10 size-5 text-white cursor-pointer ${!edit && 'hidden'}`} /> */}
+                            <FinancialSummaryEdit edit={edit} flat={flat} category={item.category} />
 
                             <div className="flex items-center justify-between gap-3">
                                 <p className="text-xs text-muted-foreground">
