@@ -116,3 +116,47 @@ export interface IAddFlat {
     buildingImage?: string;
 
 }
+
+
+
+
+export interface IUpdateFlat {
+    // Mandatory Fields
+    buildingId?: string;
+    buildingName?: string;
+    flatNumber?: string;
+    floor?: string;
+    rentalCategory?: RentalCategory;
+    monthlyRent?: number;
+    serviceCharge?: number;
+    status?: FlatStatus;
+    gasType?: GasType;
+    electricityType?: ElectricityType;
+
+    // Optional Room & Space Specs
+    sizeSqFt?: number;
+    facing?: FacingDirection;
+    bedrooms?: number;
+    attachedBathrooms?: number;
+    commonBathrooms?: number;
+    balconies?: number;
+    hasDrawingDining?: boolean;
+    hasServantRoom?: boolean;
+
+    // Optional Utilities & Amenities
+    gasMeterOrAccountNo?: string;
+    electricityMeterNo?: string;
+    hasParking?: boolean;
+    parkingSlotNo?: string;
+    hasLift?: boolean;
+    hasGenerator?: boolean;
+
+    // Optional Financial & Extra Info
+    securityDeposit?: number;
+    waterBillFixed?: number;
+    garbageBillFixed?: number;
+    notes?: string;
+    flatImage?: string;
+    buildingImage?: string;
+
+}
