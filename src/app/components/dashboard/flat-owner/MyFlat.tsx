@@ -21,10 +21,12 @@ import type { IFlat } from "@/types/flatTypes";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import EditFlat from "./EditFlat";
+import AssignTenant from "./AssignTenant";
+import { ITenant } from "@/types/tenantTypes";
 
 
 
-const MyFlat = ({ flats }: { flats: IFlat[] }) => {
+const MyFlat = ({ flats, tenants }: { flats: IFlat[], tenants: ITenant[] }) => {
   const t = useTranslations('myFlat')
   const [filter, setFilter] = useState<"ALL" | IFlat["status"]>("ALL");
 
@@ -240,10 +242,7 @@ const MyFlat = ({ flats }: { flats: IFlat[] }) => {
                     <td className="px-6 py-4 text-right">
                       <div className="inline-flex items-center justify-end gap-2">
                         {flat.status === "Vacant" && (
-                          <button className="inline-flex items-center gap-1 rounded-md bg-emerald-600 px-2.5 py-1.5 text-xs font-medium text-white hover:bg-emerald-700 dark:bg-emerald-500 dark:text-slate-950 dark:hover:bg-emerald-400">
-                            <UserPlus className="h-3.5 w-3.5" />
-                            {t("actions.assign")}
-                          </button>
+                          <AssignTenant flat={flat} tenants={tenants}/>
                         )}
                         <EditFlat flat={flat} />
                         <Link href={`/dashboard/flat-owner/my-flats/${flat._id}`}>
@@ -344,10 +343,11 @@ const MyFlat = ({ flats }: { flats: IFlat[] }) => {
               {/* Card Actions */}
               <div className="flex items-center gap-2 pt-1">
                 {flat.status === "Vacant" && (
-                  <button className="cursor-pointer flex-1 inline-flex items-center justify-center gap-1.5 rounded-lg bg-emerald-600 px-3 py-2 text-xs font-medium text-white hover:bg-emerald-700 dark:bg-emerald-500 dark:text-slate-950 dark:hover:bg-emerald-400">
-                    <UserPlus className="h-3.5 w-3.5" />
-                    {t("actions.assignTenant")}
-                  </button>
+                  // <button className="cursor-pointer flex-1 inline-flex items-center justify-center gap-1.5 rounded-lg bg-emerald-600 px-3 py-2 text-xs font-medium text-white hover:bg-emerald-700 dark:bg-emerald-500 dark:text-slate-950 dark:hover:bg-emerald-400">
+                  //   <UserPlus className="h-3.5 w-3.5" />
+                  //   {t("actions.assignTenant")}
+                  // </button>
+                  <AssignTenant flat={flat} tenants={tenants}/>
                 )}
 
                 <EditFlat flat={flat} />
