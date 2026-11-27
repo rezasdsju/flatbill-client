@@ -32,6 +32,7 @@ import BuildingImageEdit from "./section-based-edit/BuildingImageEdit";
 import RoomDetailEdit from "./section-based-edit/RoomDetailEdit";
 import FinancialSummaryEdit from "./section-based-edit/FinalcialSummaryEdit";
 import UtilitiesEdit from "./section-based-edit/UtilitiesEdit";
+import AmenitiesEdit from "./section-based-edit/AmenitiesEdit";
 
 const FlatDetail = ({ flat }: { flat: IFlat }) => {
     const t = useTranslations("flatDetail");
@@ -364,7 +365,9 @@ const FlatDetail = ({ flat }: { flat: IFlat }) => {
 
                     {/* Amenities */}
                     <Section className="relative" title={t("amenities")} icon={<Car className="size-5" />}>
-                        <Pencil className={`absolute right-3 top-3 z-10 size-5 text-white cursor-pointer ${!edit && 'hidden'}`} />
+                        {/* <Pencil className={`absolute right-3 top-3 z-10 size-5 text-white cursor-pointer ${!edit && 'hidden'}`} /> */}
+
+                        <AmenitiesEdit edit={edit} flat={flat} />
 
 
                         <div className="grid gap-2 sm:grid-cols-2">
