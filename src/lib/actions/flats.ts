@@ -1,6 +1,6 @@
 "use server"
 import { baseUrl } from "@/constants/baseURL"
-import { IAddFlat } from "@/types/flatTypes"
+import { IAddFlat, IUpdateFlat } from "@/types/flatTypes"
 import { protectedMutation } from "../core/server"
 
 const BASE_URL = baseUrl()
@@ -14,7 +14,7 @@ export const addNewFlat = async (data: IAddFlat) => {
     return json
 }
 
-export const updateFlat = async (id: string, data: IAddFlat) => {
+export const updateFlat = async (id: string, data: IUpdateFlat) => {
     const api = `${BASE_URL}/flat-owner/flats/${id}`
     const res = await protectedMutation(api, 'PATCH', data)
     const json = await res.json().catch(() => null)
