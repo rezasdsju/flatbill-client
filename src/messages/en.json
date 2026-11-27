@@ -479,6 +479,9 @@
             "error": "Something went wrong",
             "networkError": "Network error"
         },
+        "validation": {
+            "number": "Please enter a valid number"
+        },
         "images": {
             "title": "Images",
             "description": "Optional photos help identify the flat and its building.",
