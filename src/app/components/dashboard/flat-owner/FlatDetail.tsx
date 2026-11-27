@@ -29,6 +29,7 @@ import { useState } from "react";
 import BasicInfoEdit from "./section-based-edit/BasicInfoEdit";
 import FlatImageEdit from "./section-based-edit/FlatImageEdit";
 import BuildingImageEdit from "./section-based-edit/BuildingImageEdit";
+import RoomDetailEdit from "./section-based-edit/RoomDetailEdit";
 
 const FlatDetail = ({ flat }: { flat: IFlat }) => {
     const t = useTranslations("flatDetail");
@@ -301,7 +302,8 @@ const FlatDetail = ({ flat }: { flat: IFlat }) => {
 
                     {/* Room specifications */}
                     <Section className="relative" title={t("roomDetails")} icon={<Ruler className="size-5" />}>
-                        <Pencil className={`absolute right-3 top-3 z-10 size-5 text-white cursor-pointer ${!edit && 'hidden'}`} />
+                        {/* <Pencil className={`absolute right-3 top-3 z-10 size-5 text-white cursor-pointer ${!edit && 'hidden'}`} /> */}
+                        <RoomDetailEdit edit={edit} flat={flat} />
 
 
                         <div className="grid grid-cols-2 gap-x-4 gap-y-5 sm:grid-cols-3">
