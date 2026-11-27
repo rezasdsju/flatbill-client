@@ -8,6 +8,7 @@ type FacingDirection = "South" | "North" | "East" | "West" | "South-East" | "Sou
 export interface UserSummary {
     _id: string;
     name: string | null;
+    image?: string;
     email: string;
     phone?: string | null;
     nid?: string;
@@ -159,5 +160,7 @@ export interface IUpdateFlat {
     notes?: string;
     flatImage?: string;
     buildingImage?: string;
+
+    presentTenants?: PresentTenantRecord[];
 
 }
