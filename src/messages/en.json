@@ -530,6 +530,18 @@
         "noTenantAssigned": "No tenants assigned",
         "flatFloor": "Flat {flatNumber} · Floor {floor}",
         "moveIn": "Move-in: {date}",
-        "dateNotProvided": "Not provided"
+        "dateNotProvided": "Not provided",
+        "moveOut": {
+            "trigger": "Move Out",
+            "title": "Mark tenant as moved out?",
+            "description": "This tenant will be unassigned from your flat and moved to your past tenants history. The flat will become vacant and ready for a new tenant.",
+            "confirm": "Confirm",
+            "loading": "Moving Out...",
+            "cancel": "Cancel",
+            "flatMissing": "Flat information is missing",
+            "tenantMissing": "Tenant information is missing",
+            "failure": "Failed to move out tenant",
+            "success": "Tenant moved out successfully"
+        }
     }
 }
