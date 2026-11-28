@@ -73,7 +73,7 @@ const sideBarItems = {
         { name: "dashboard", url: "/dashboard/flat-owner", icon: LayoutDashboard },
         { name: "addFlats", url: "/dashboard/flat-owner/add-flat", icon: HousePlus },
         { name: "myFlats", url: "/dashboard/flat-owner/my-flats", icon: Home },
-        { name: "myTenants", url: "/dashboard/flat-owner/tenants", icon: UserCheck },
+        { name: "myTenants", url: "/dashboard/flat-owner/my-tenants", icon: UserCheck },
         { name: "ownerBillsDues", url: "/dashboard/flat-owner/bills", icon: Receipt },
         { name: "associationAccounts", url: "/dashboard/flat-owner/association-finance", icon: FileBarChart2 },
         { name: "noticesMeetings", url: "/dashboard/flat-owner/notices", icon: Megaphone },
