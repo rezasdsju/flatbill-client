@@ -164,3 +164,14 @@ export interface IUpdateFlat {
     presentTenants?: PresentTenantRecord[];
 
 }
+
+
+
+export interface IFlatWithTenants {
+    _id: string;
+    buildingName: string;
+    flatNumber: string;
+    floor: string;
+    currentDueAmount: number;
+    presentTenants: PresentTenantRecord[];
+}
