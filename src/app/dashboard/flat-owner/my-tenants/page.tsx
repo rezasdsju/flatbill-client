@@ -5,7 +5,7 @@ import { getAssignedTenantsByFlatOwner } from "@/lib/api/users";
 
 const MyTenantsPage = async() => {
     const tenants = await getAssignedTenantsByFlatOwner()
-    console.log(tenants)
+    // console.log(tenants)
     return (
         <div>
             <MyTenants tenants={tenants}/>
