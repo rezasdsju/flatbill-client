@@ -9,3 +9,9 @@ export const getTenantsByFlatOwner = async () => {
     const res = await authFetch(api)
     return res.json()
 }
+
+export const getAssignedTenantsByFlatOwner = async () => {
+    const api = `${BASE_URL}/flat-owner/my-tenants`
+    const res = await authFetch(api)
+    return res.json()
+}
