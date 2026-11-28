@@ -512,5 +512,24 @@
         "phone": "Phone number",
         "cancel": "Cancel",
         "saveChanges": "Save changes"
+    },
+    "myTenants": {
+        "title": "My Tenants",
+        "description": "Tenant details for your properties",
+        "overview": "Tenant overview",
+        "properties": "Properties",
+        "currentTenants": "Current tenants",
+        "totalDue": "Total due",
+        "emptyTitle": "No tenants to show",
+        "emptyDescription": "Assigned tenants will appear here.",
+        "property": "Property",
+        "tenant": "Tenant",
+        "contact": "Contact",
+        "moveInDate": "Move-in date",
+        "currentDue": "Current due",
+        "noTenantAssigned": "No tenants assigned",
+        "flatFloor": "Flat {flatNumber} · Floor {floor}",
+        "moveIn": "Move-in: {date}",
+        "dateNotProvided": "Not provided"
     }
 }

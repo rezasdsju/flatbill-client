@@ -512,5 +512,24 @@
         "phone": "ফোন নম্বর",
         "cancel": "বাতিল",
         "saveChanges": "পরিবর্তন সংরক্ষণ করুন"
+    },
+    "myTenants": {
+        "title": "আমার ভাড়াটিয়ারা",
+        "description": "আপনার সম্পত্তির ভাড়াটিয়াদের তথ্য",
+        "overview": "ভাড়াটিয়াদের সারসংক্ষেপ",
+        "properties": "সম্পত্তি",
+        "currentTenants": "বর্তমান ভাড়াটিয়া",
+        "totalDue": "মোট বকেয়া",
+        "emptyTitle": "দেখানোর মতো কোনো ভাড়াটিয়া নেই",
+        "emptyDescription": "বরাদ্দ করা ভাড়াটিয়ারা এখানে দেখা যাবে।",
+        "property": "সম্পত্তি",
+        "tenant": "ভাড়াটিয়া",
+        "contact": "যোগাযোগ",
+        "moveInDate": "উঠে আসার তারিখ",
+        "currentDue": "বর্তমান বকেয়া",
+        "noTenantAssigned": "কোনো ভাড়াটিয়া বরাদ্দ নেই",
+        "flatFloor": "ফ্ল্যাট {flatNumber} · তলা {floor}",
+        "moveIn": "উঠে আসার তারিখ: {date}",
+        "dateNotProvided": "তথ্য দেওয়া হয়নি"
     }
 }
