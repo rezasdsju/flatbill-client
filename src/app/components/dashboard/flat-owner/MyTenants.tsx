@@ -9,6 +9,8 @@ import {
 } from "lucide-react";
 import type { IFlatWithTenants, PresentTenantRecord } from "@/types/flatTypes";
 import { useLocale, useTranslations } from "next-intl";
+import { Button } from "@/components/ui/button";
+import MoveOutTenant from "./MoveOutTenant";
 
 const formatDate = (date: string, locale: string, fallback: string) => {
     const parsedDate = new Date(date);
@@ -146,6 +148,7 @@ const MyTenants = ({ tenants }: { tenants: IFlatWithTenants[] }) => {
                                             <th scope="col" className="px-5 py-4">{t("contact")}</th>
                                             <th scope="col" className="px-5 py-4">{t("moveInDate")}</th>
                                             <th scope="col" className="px-5 py-4 text-right">{t("currentDue")}</th>
+                                            <th scope="col" className="px-5 py-4 text-right">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-border">
@@ -195,6 +198,12 @@ const MyTenants = ({ tenants }: { tenants: IFlatWithTenants[] }) => {
                                                         {formatAmount(flat.currentDueAmount, locale)}
                                                     </span>
                                                 </td>
+                                                <td className="whitespace-nowrap px-5 py-5 text-right">
+                                                    {/* <Button type="button" variant="destructive" size="sm">
+                                                        Move Out
+                                                    </Button> */}
+                                                    <MoveOutTenant flatId={flat._id} tenants={flat.presentTenants} />
+                                                </td>
                                             </tr>
                                         ))}
                                     </tbody>
@@ -242,6 +251,7 @@ const MyTenants = ({ tenants }: { tenants: IFlatWithTenants[] }) => {
                                         <span className={flat.currentDueAmount > 0 ? "font-semibold text-destructive" : "font-medium text-card-foreground"}>
                                             {formatAmount(flat.currentDueAmount, locale)}
                                         </span>
+                                        <MoveOutTenant flatId={flat._id} tenants={flat.presentTenants} />
                                     </div>
                                 </article>
                             ))}
